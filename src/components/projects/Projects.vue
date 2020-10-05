@@ -13,7 +13,7 @@
                 banner: {
                     title: 'Наши проекты',
                     subtitle: 'Клиенты и проекты',
-                    bgImg: 'web-bg.jpg',
+                    bgImg: 'projects-bg.jpeg',
                 }
             }
         },
