@@ -1,11 +1,11 @@
 <template>
     <section class="banner">
-        <video v-if="banner.bgVideo1" class="banner__video" autoplay="" preload="metadata" loop="" muted="" playsinline="" :poster="require('../../assets/video/'+ banner.bgImg)">
-            <source :src="require('../../assets/video/' + banner.bgVideo1)" type="video/mp4">
-            <source :src="require('../../assets/video/' + banner.bgVideo2)" type="video/webm">
+        <video v-if="banner.bgVideo1" class="banner__video" autoplay="" preload="metadata" loop="" muted="" playsinline="" :poster="require('../../assets/banner/'+ banner.bgImg)">
+            <source :src="require('../../assets/banner/' + banner.bgVideo1)" type="video/mp4">
+            <source :src="require('../../assets/banner/' + banner.bgVideo2)" type="video/webm">
         </video>
         <div v-else class="banner__video">
-            <img :src="require('../../assets/video/'+ banner.bgImg)">
+            <img :src="require('../../assets/banner/'+ banner.bgImg)">
         </div>
         <div class="container">
             <div class="row">
