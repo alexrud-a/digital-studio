@@ -4,7 +4,7 @@
             <source :src="require('../../assets/video/' + banner.bgVideo1)" type="video/mp4">
             <source :src="require('../../assets/video/' + banner.bgVideo2)" type="video/webm">
         </video>
-        <div class="container">
+        <div class="container contain">
             <div class="row">
                 <div class="col-sm-12">
                     <span class="subtitle banner__subtitle">
