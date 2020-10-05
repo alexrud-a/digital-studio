@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <perfect-scrollbar>
+    <perfect-scrollbar ref="scroll">
     <Header/>
     <Main/>
     <Footer/>
@@ -19,6 +19,11 @@ export default {
     Header,
     Main,
     Footer
+  },
+  watch: {
+    $route() {
+      this.$refs.scroll.$el.scrollTop = 0;
+    }
   }
 }
 </script>

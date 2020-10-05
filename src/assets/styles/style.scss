@@ -90,6 +90,7 @@
 $font: "Gilroy", sans-serif;
 $accent-color: #f30;
 $base-color: #141414;
+$tablet: 768px;
 
 /*---------END VARIABLES----------*/
 
@@ -131,6 +132,7 @@ $base-color: #141414;
   a {
     color: $accent-color;
     font-weight: 500;
+    text-decoration: none;
   }
 
   .container-fluid {
