@@ -1,9 +1,10 @@
 <template>
     <section class="banner">
-        <video class="banner__video" autoplay="" preload="metadata" loop="" muted="" playsinline="" :poster="require('../../assets/video/'+ banner.bgImg)">
+        <video v-if="banner.bgVideo1" class="banner__video" autoplay="" preload="metadata" loop="" muted="" playsinline="" :poster="require('../../assets/video/'+ banner.bgImg)">
             <source :src="require('../../assets/video/' + banner.bgVideo1)" type="video/mp4">
             <source :src="require('../../assets/video/' + banner.bgVideo2)" type="video/webm">
         </video>
+        <div v-else class="banner__poster" :style="style"></div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -29,6 +30,11 @@
                     return {}
                 }
             },
+        },
+        computed: {
+            style () {
+                return 'background-image: ' + this.banner.bgImg;
+            }
         },
     }
 </script>
@@ -64,6 +70,17 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+        }
+
+        &__poster {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     }
 </style>
