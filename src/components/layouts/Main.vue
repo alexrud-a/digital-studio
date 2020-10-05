@@ -12,6 +12,8 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+    .main {
+        height: 200vh;
+    }
 </style>

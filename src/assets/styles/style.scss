@@ -1,0 +1,137 @@
+/*---------FONTS----------*/
+@font-face {
+  font-family: "Gilroy";
+  src: url("~@/assets/fonts/gilroy-black.woff") format("woff"),
+  url("~@/assets/fonts/gilroy-black.woff2") format("woff2"),
+  url("~@/assets/fonts/gilroy-black.ttf") format("truetype"),
+  url("~@/assets/fonts/gilroy-black.eot?") format("eot"),
+  url("~@/assets/fonts/gilroy-black.svg") format("svg");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("~@/assets/fonts/gilroy-heavy.woff") format("woff"),
+  url("~@/assets/fonts/gilroy-heavy.woff2") format("woff2"),
+  url("~@/assets/fonts/gilroy-heavy.ttf") format("truetype"),
+  url("~@/assets/fonts/gilroy-heavy.eot?") format("eot"),
+  url("~@/assets/fonts/gilroy-heavy.svg") format("svg");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("~@/assets/fonts/gilroy-bold.woff") format("woff"),
+  url("~@/assets/fonts/gilroy-bold.woff2") format("woff2"),
+  url("~@/assets/fonts/gilroy-bold.ttf") format("truetype"),
+  url("~@/assets/fonts/gilroy-bold.eot?") format("eot"),
+  url("~@/assets/fonts/gilroy-bold.svg") format("svg");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("~@/assets/fonts/gilroy-semibold.woff") format("woff"),
+  url("~@/assets/fonts/gilroy-semibold.woff2") format("woff2"),
+  url("~@/assets/fonts/gilroy-semibold.ttf") format("truetype"),
+  url("~@/assets/fonts/gilroy-semibold.eot?") format("eot"),
+  url("~@/assets/fonts/gilroy-semibold.svg") format("svg");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("~@/assets/fonts/gilroy-medium.woff") format("woff"),
+  url("~@/assets/fonts/gilroy-medium.woff2") format("woff2"),
+  url("~@/assets/fonts/gilroy-medium.ttf") format("truetype"),
+  url("~@/assets/fonts/gilroy-medium.eot?") format("eot"),
+  url("~@/assets/fonts/gilroy-medium.svg") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("~@/assets/fonts/gilroy-regular.woff") format("woff"),
+  url("~@/assets/fonts/gilroy-regular.woff2") format("woff2"),
+  url("~@/assets/fonts/gilroy-regular.ttf") format("truetype"),
+  url("~@/assets/fonts/gilroy-regular.eot?") format("eot"),
+  url("~@/assets/fonts/gilroy-regular.svg") format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("~@/assets/fonts/gilroy-thin.woff") format("woff"),
+  url("~@/assets/fonts/gilroy-thin.woff2") format("woff2"),
+  url("~@/assets/fonts/gilroy-thin.ttf") format("truetype"),
+  url("~@/assets/fonts/gilroy-thin.eot?") format("eot"),
+  url("~@/assets/fonts/gilroy-thin.svg") format("svg");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*---------END FONTS----------*/
+
+/*---------VARIABLES----------*/
+
+$font: "Gilroy", sans-serif;
+$accent-color: #f30;
+$base-color: #141414;
+
+/*---------END VARIABLES----------*/
+
+/*---------SCROLL-BAR----------*/
+
+.ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y {
+  background-color: #cccccc!important;
+  width: 10px!important;
+  opacity: 1!important;
+}
+.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y, .ps__thumb-y {
+  background-color: $accent-color!important;
+  width: 10px!important;
+  right: 0!important;
+  border-radius: 0!important;
+}
+.ps {
+  height: 100vh;
+}
+
+/*---------END SCROLL-BAR----------*/
+
+/*---------TYPOGRAPHY----------*/
+
+#app {
+  font-family: $font;
+  font-weight: 400;
+  color: $base-color;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font;
+    font-weight: 900;
+  }
+
+  p {
+    font-weight: 400;
+  }
+
+  a {
+    color: $accent-color;
+    font-weight: 500;
+  }
+}
+
+/*---------TYPOGRAPHY END----------*/

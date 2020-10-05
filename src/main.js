@@ -23,6 +23,11 @@ import VueMask from 'v-mask'
 
 Vue.use(VueMask);
 
+import PerfectScrollbar from 'vue2-perfect-scrollbar'
+import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+
+Vue.use(PerfectScrollbar)
+
 Vue.config.productionTip = false
 
 new Vue({
