@@ -1,0 +1,17 @@
+/*---------SCROLL-BAR----------*/
+
+.ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y {
+  background-color: #cccccc!important;
+  width: 10px;
+  opacity: 1!important;
+}
+.ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y, .ps__thumb-y {
+  background-color: #f30!important;
+  width: 10px;
+  right: 0;
+  border-radius: 0!important;
+}
+.ps {
+  height: 100vh;
+}
+/*---------END SCROLL-BAR----------*/
