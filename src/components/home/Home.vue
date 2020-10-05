@@ -1,12 +1,28 @@
 <template>
     <div class="home">
-        <h1>Home</h1>
+        <Banner :banner="banner"/>
     </div>
 </template>
 
 <script>
+    import Banner from "../layouts/Banner";
+
     export default {
-        name: "Home"
+        name: "Home",
+        data() {
+            return {
+                banner: {
+                    title: 'We love digital Marketing',
+                    subtitle: 'We are elements',
+                    bgVideo1: 'web-bg.mp4',
+                    bgVideo2: 'web-bg.webm',
+                    bgImg: 'web-bg.jpg',
+                }
+            }
+        },
+        components: {
+            Banner
+        }
     }
 </script>
 

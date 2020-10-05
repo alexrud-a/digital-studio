@@ -2,13 +2,11 @@
     <header class="header">
         <div class="container-fluid">
             <div class="row justify-content-between align-items-center">
-                <span @click="toggleMenu">
-                    <router-link
-                            class="header__logo"
-                            :to="{name: 'Home'}">
+                <router-link
+                        class="header__logo"
+                        :to="{name: 'Home'}">
                     <img src="@/assets/img/logo.svg">
                 </router-link>
-                </span>
                 <button class="header__toggle" @click="toggleMenu">
                     <span></span>
                     <span></span>
@@ -65,6 +63,7 @@
         left: 0;
         right: 0;
         top: 0;
+        z-index: 9;
 
         &__logo {
             position: relative;
