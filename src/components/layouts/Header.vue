@@ -5,7 +5,10 @@
                 <router-link
                         class="header__logo"
                         :to="{name: 'Home'}">
-                    <img src="@/assets/img/logo.svg">
+                    <picture>
+                        <source media="(min-width: 768px)" srcset="@/assets/img/logo.svg">
+                        <img src="@/assets/img/logo-min.svg" alt="logo">
+                    </picture>
                 </router-link>
                 <button class="header__toggle" @click="toggleMenu">
                     <span></span>
@@ -58,12 +61,16 @@
 
 <style lang="scss">
     .header {
-        padding: 50px;
+        padding: 20px;
         position: fixed;
         left: 0;
         right: 0;
         top: 0;
         z-index: 9;
+
+        @media screen and (min-width: $tablet) {
+            padding: 50px;
+        }
 
         &__logo {
             position: relative;
@@ -122,7 +129,7 @@
             top: 0;
             bottom: 0;
             background-color: #fff;
-            padding: 40px;
+            padding: 60px 20px;
             width: 100%;
             max-width: 100%;
             height: 100%;
