@@ -1,9 +1,12 @@
 <template>
     <section class="banner">
-        <video class="banner__video" autoplay="" preload="metadata" loop="" muted="" playsinline="" :poster="require('../../assets/video/'+ banner.bgImg)">
+        <video v-if="banner.bgVideo1" class="banner__video" autoplay="" preload="metadata" loop="" muted="" playsinline="" :poster="require('../../assets/video/'+ banner.bgImg)">
             <source :src="require('../../assets/video/' + banner.bgVideo1)" type="video/mp4">
             <source :src="require('../../assets/video/' + banner.bgVideo2)" type="video/webm">
         </video>
+        <div v-else class="banner__video">
+            <img :src="require('../../assets/video/'+ banner.bgImg)">
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -64,6 +67,13 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
         }
 
         &__poster {
