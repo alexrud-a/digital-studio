@@ -20,6 +20,11 @@ export default {
     Main,
     Footer
   },
+  data() {
+    return {
+      isVisible: true,
+    }
+  },
   watch: {
     $route() {
       this.$refs.scroll.$el.scrollTop = 0;
@@ -28,6 +33,3 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
-</style>

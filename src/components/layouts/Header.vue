@@ -47,7 +47,8 @@
         name: "Header",
         data() {
             return {
-                isActive: false
+                isActive: false,
+                isVisible: true,
             }
         },
         methods: {
@@ -55,6 +56,9 @@
                 let self = this;
                 self.isActive = !self.isActive;
             }
+        },
+        computed() {
+            this.isVisible = false;
         }
     }
 </script>
