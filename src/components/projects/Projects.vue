@@ -8,14 +8,29 @@
     import Banner from "../layouts/Banner";
     export default {
         name: "Projects",
-        data() {
+        data () {
             return {
                 banner: {
-                    title: 'Наши проекты',
-                    subtitle: 'Клиенты и проекты',
-                    bgImg: 'projects-bg.jpeg',
+                    title: null,
+                    subtitle: null,
+                    bgImg: null,
+                    bgVideo1: null,
+                    bgVideo2: null,
                 }
+            };
+        },
+        methods: {
+            getContent () {
+                this.$prismic.client.getSingle('projects')
+                    .then((document) => {
+                        this.banner.title = document.data.title[0].text;
+                        this.banner.subtitle = document.data.subtitle[0].text;
+                        this.banner.bgImg = document.data.bgImg.url;
+                    })
             }
+        },
+        created () {
+            this.getContent();
         },
         components: {
             Banner,
