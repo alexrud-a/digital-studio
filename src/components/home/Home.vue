@@ -9,16 +9,31 @@
 
     export default {
         name: "Home",
-        data() {
+        data () {
             return {
                 banner: {
-                    title: 'We love digital Marketing',
-                    subtitle: 'We are elements',
-                    bgVideo1: 'web-bg.mp4',
-                    bgVideo2: 'web-bg.webm',
-                    bgImg: 'web-bg.jpg',
+                    title: null,
+                    subtitle: null,
+                    bgImg: null,
+                    bgVideo1: null,
+                    bgVideo2: null,
                 }
-            }
+            };
+        },
+        methods: {
+            getContent () {
+                this.$prismic.client.getSingle('home')
+                    .then((document) => {
+                        this.banner.title = document.data.title[0].text;
+                        this.banner.subtitle = document.data.subtitle[0].text;
+                        this.banner.bgImg = document.data.bgImg.url;
+                        this.banner.bgVideo1 = document.data.bgVideo1.url;
+                        this.banner.bgVideo2 = document.data.bgVideo2.url;
+                    })
+                }
+        },
+        created () {
+            this.getContent();
         },
         components: {
             Banner
