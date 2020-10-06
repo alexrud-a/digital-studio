@@ -10,7 +10,7 @@
                         <img src="@/assets/img/logo-min.svg" alt="logo">
                     </picture>
                 </router-link>
-                <button class="header__toggle" @click="toggleMenu">
+                <button class="header__toggle" @click="toggleMenu" :class="{'header__toggle--open': isActive}">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -88,6 +88,11 @@
             width: 30px;
             height: 20px;
             z-index: 99;
+            transition: all .4s ease-in-out;
+
+            &:not(&--open):hover {
+                height: 24px;
+            }
 
             span {
                 position: absolute;
@@ -97,6 +102,7 @@
                 left: 0;
                 right: 0;
                 background-color: $accent-color;
+                transition: all .4s ease-in-out;
 
                 &:first-child {
                     top: 0;
@@ -108,6 +114,29 @@
 
                 &:last-child {
                     bottom: 0;
+                }
+            }
+
+            &--open {
+                transform: rotate(-90deg);
+
+                span:nth-child(1){
+                    left:3px;
+                    top: 12px;
+                    width: 30px;
+                    transform: rotate(90deg);
+                }
+                span:nth-child(2){
+                    left:2px;
+                    top: 20px;
+                    width: 20px;
+                    transform: rotate(45deg);
+                }
+                span:nth-child(3){
+                    left:14px;
+                    top: 20px;
+                    width: 20px;
+                    transform: rotate(-45deg);
                 }
             }
         }

@@ -115,7 +115,7 @@
             padding: 25px;
             padding-bottom: 10px;
             left: 50%;
-            z-index: 30;
+            z-index: 3;
             margin-left: -33px;
             animation: scrollDown 3s infinite;
             animation-timing-function: ease-out;
