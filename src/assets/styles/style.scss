@@ -147,6 +147,7 @@ $tablet: 768px;
     text-transform: uppercase;
     position: relative;
     padding-bottom: 20px;
+    text-align: center;
 
     &::before {
       content: "";
@@ -172,10 +173,15 @@ $tablet: 768px;
     display: block;
     font-weight: 700;
     text-transform: uppercase;
+    text-align: center;
 
     @media screen and (min-width: $tablet) {
       font-size: 20px;
     }
+  }
+
+  .section {
+    padding: 80px 0;
   }
 }
 
