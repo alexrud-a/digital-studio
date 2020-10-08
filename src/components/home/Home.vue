@@ -80,6 +80,15 @@
                     </div>
                 </div>
             </div>
+            <div class="container p-0">
+                <div class="clients">
+                    <div class="clients__item" v-for="(item, index) in clients" :key="index">
+                        <svg>
+                            <use :href="'/img/clients.svg#logo'+index"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 </template>
@@ -102,6 +111,7 @@
                 section2: null,
                 section3: null,
                 icons: null,
+                clients: 24,
             };
         },
         methods: {
@@ -260,6 +270,66 @@
 
         &:hover .mini-banner__img {
             transform: scale(1.05);
+        }
+    }
+
+    .clients {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 40px;
+
+        &__item {
+            width: 33.3333%;
+            padding: 10px;
+            border-right: 1px solid #c8c8c8;
+            border-bottom: 1px solid #c8c8c8;
+            transition: all .3s linear;
+            max-height: 125px;
+
+            &:nth-of-type(3n) {
+                border-right: none;
+            }
+
+            &:nth-last-of-type(-n+3) {
+                border-bottom: none;
+            }
+
+            @media screen  and (min-width: $tablet) {
+                max-height: 145px;
+                padding: 20px;
+            }
+            @media screen and (min-width: $desktop) {
+                width: 16.6666%;
+
+                &:nth-of-type(3n) {
+                    border-right: 1px solid #c8c8c8;
+                }
+
+                &:nth-last-of-type(-n+3) {
+                    border-bottom: 1px solid #c8c8c8;
+                }
+
+                &:nth-of-type(6n) {
+                    border-right: none;
+                }
+
+                &:nth-last-of-type(-n+6) {
+                    border-bottom: none;
+                }
+            }
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+
+            &:hover {
+                background-color: $base-color;
+
+                svg {
+                    fill: #fff;
+                }
+            }
         }
     }
 
