@@ -84,6 +84,7 @@ $font: "Gilroy", sans-serif;
 $accent-color: #f30;
 $base-color: #141414;
 $tablet: 768px;
+$desktop: 1200px;
 
 /*---------END VARIABLES----------*/
 
@@ -91,14 +92,22 @@ $tablet: 768px;
 
 .ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y {
   background-color: #cccccc!important;
-  width: 10px!important;
+  width: 4px!important;
   opacity: 1!important;
+
+  @media screen and (min-width: $tablet) {
+    width: 8px!important;
+  }
 }
 .ps__rail-y:hover > .ps__thumb-y, .ps__rail-y:focus > .ps__thumb-y, .ps__rail-y.ps--clicking .ps__thumb-y, .ps__thumb-y {
   background-color: $accent-color!important;
-  width: 10px!important;
+  width: 4px!important;
   right: 0!important;
   border-radius: 0!important;
+
+  @media screen and (min-width: $tablet) {
+    width: 8px!important;
+  }
 }
 .ps {
   height: 100vh;
@@ -114,9 +123,12 @@ $tablet: 768px;
   color: $base-color;
   overflow-x: hidden;
 
+  img {
+    max-width: 100%;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: $font;
-    font-weight: 900;
   }
 
   p {
@@ -124,9 +136,12 @@ $tablet: 768px;
   }
 
   a {
-    color: $accent-color;
     font-weight: 500;
     text-decoration: none;
+  }
+
+  .link {
+    color: $accent-color;
   }
 
   .container-fluid {
@@ -143,11 +158,12 @@ $tablet: 768px;
   .title {
     font-size: 44px;
     line-height: 1;
-    letter-spacing: -4px;
+    letter-spacing: -2px;
     text-transform: uppercase;
     position: relative;
     padding-bottom: 20px;
     text-align: center;
+    font-weight: 900;
 
     &::before {
       content: "";
@@ -161,7 +177,44 @@ $tablet: 768px;
     }
 
     @media screen and (min-width: $tablet) {
+      font-size: 72px;
+      letter-spacing: -4px;
+    }
+
+    @media screen and (min-width: $desktop) {
       font-size: 94px;
+    }
+
+    &--section {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+
+      @media screen and (min-width: $tablet) {
+        font-size: 48px;
+      }
+    }
+
+    &--left {
+      text-align: left;
+
+      &::before {
+        left: 0;
+        transform: none;
+      }
+    }
+
+    &--mini {
+      font-size: 22px;
+
+      @media screen and (min-width: $tablet) {
+        font-size: 32px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        font-size: 48px;
+      }
     }
   }
 
@@ -175,13 +228,55 @@ $tablet: 768px;
     text-transform: uppercase;
     text-align: center;
 
+    &--left {
+      text-align: left;
+    }
+
     @media screen and (min-width: $tablet) {
       font-size: 20px;
     }
   }
 
   .section {
-    padding: 80px 0;
+    padding: 40px 0;
+
+    @media screen and (min-width: $tablet) {
+      padding: 60px 0;
+    }
+
+    @media screen  and (min-width: $desktop){
+      padding: 80px 0;
+    }
+
+    &--gray {
+      background-image: linear-gradient(rgba(255, 255, 255, 0) 0px, rgb(237, 237, 237) 100%);
+    }
+  }
+
+  .text {
+    font-size: 16px;
+
+    @media screen and (min-width: $tablet) {
+      font-size: 24px;
+    }
+
+    @media screen  and (min-width: $desktop){
+      font-size: 32px;
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+    &--mini {
+      @media screen and (min-width: $tablet) {
+        font-size: 18px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        font-size: 20px;
+      }
+    }
   }
 }
 
