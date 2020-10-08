@@ -170,8 +170,12 @@
             list-style: none;
 
             @media screen and (min-width: $tablet) {
-                width: 30vw;
+                width: 50vw;
                 padding: 125px 75px;
+            }
+
+            @media screen and (min-width: $desktop) {
+                width: 30vw;
             }
 
             &-item {

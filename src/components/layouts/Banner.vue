@@ -67,6 +67,7 @@
         text-align: center;
         position: relative;
         color: #fff;
+        padding: 15px;
 
         &::before {
             content: "";
