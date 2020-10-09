@@ -35,6 +35,15 @@
                                 </router-link>
                             </span>
                         </li>
+                        <li class="header__menu-item">
+                            <span @click="toggleMenu">
+                                <router-link
+                                        class="header__menu-link"
+                                        :to="{name: 'Solutions'}">
+                                    Решения
+                                </router-link>
+                            </span>
+                        </li>
                     </ul>
                 </nav>
             </div>
