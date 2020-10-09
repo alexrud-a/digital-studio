@@ -11,21 +11,20 @@
         data () {
             return {
                 banner: {
-                    title: null,
-                    subtitle: null,
-                    bgImg: null,
-                    bgVideo1: null,
-                    bgVideo2: null,
+                    title: '',
+                    subtitle: '',
+                    bgImg: '',
                 }
             };
         },
         methods: {
             getContent () {
-                this.$prismic.client.getSingle('projects')
+                let self = this;
+                self.$prismic.client.getSingle('projects')
                     .then((document) => {
-                        this.banner.title = document.data.title[0].text;
-                        this.banner.subtitle = document.data.subtitle[0].text;
-                        this.banner.bgImg = document.data.bgImg.url;
+                        self.banner.title = document.data.title[0].text;
+                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.bgImg = document.data.bgImg.url;
                     })
             }
         },

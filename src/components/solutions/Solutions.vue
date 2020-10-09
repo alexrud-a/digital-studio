@@ -45,8 +45,8 @@
                                 {{icon.title[0].text}}
                             </h4>
                             <span class="icons__text">
-                                    {{icon.text[0].text}}
-                                </span>
+                                {{icon.text[0].text}}
+                            </span>
                         </a>
                     </div>
                 </div>
@@ -66,24 +66,25 @@
         data () {
             return {
                 banner: {
-                    title: null,
-                    subtitle: null,
-                    bgImg: null,
+                    title: '',
+                    subtitle: '',
+                    bgImg: '',
                 },
-                section1: null,
-                section2: null,
-                icons: null,
+                section1: {},
+                section2: {},
+                icons: {},
             };
         },
         methods: {
             getContent () {
-                this.$prismic.client.getSingle('solutions')
+                let self = this;
+                self.$prismic.client.getSingle('solutions')
                     .then((document) => {
-                        this.banner.title = document.data.title[0].text;
-                        this.banner.subtitle = document.data.subtitle[0].text;
-                        this.banner.bgImg = document.data.bgImg.url;
-                        this.section1 = document.data.section[0];
-                        this.section2 = document.data.section[1];
+                        self.banner.title = document.data.title[0].text;
+                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.bgImg = document.data.bgImg.url;
+                        self.section1 = document.data.section[0];
+                        self.section2 = document.data.section[1];
                     });
             },
             getIcons () {
@@ -93,7 +94,7 @@
                     });
             }
         },
-        created () {
+        created() {
             this.getContent();
             this.getIcons();
         }

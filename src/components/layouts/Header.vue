@@ -64,9 +64,9 @@
             toggleMenu() {
                 let self = this;
                 self.isActive = !self.isActive;
-            }
+            },
         },
-        computed() {
+        created() {
             this.isVisible = false;
         }
     }

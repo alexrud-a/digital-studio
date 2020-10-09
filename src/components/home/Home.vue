@@ -101,40 +101,41 @@
         data () {
             return {
                 banner: {
-                    title: null,
-                    subtitle: null,
-                    bgImg: null,
-                    bgVideo1: null,
-                    bgVideo2: null,
+                    title: '',
+                    subtitle: '',
+                    bgImg: '',
+                    bgVideo1: '',
+                    bgVideo2: '',
                 },
-                section1: null,
-                section2: null,
-                section3: null,
-                icons: null,
+                section1: {},
+                section2: {},
+                section3: {},
+                icons: {},
                 clients: 24,
             };
         },
+        components: {
+            Banner,
+        },
         methods: {
             getContent () {
-                this.$prismic.client.getSingle('home')
+                let self = this;
+                self.$prismic.client.getSingle('home')
                     .then((document) => {
-                        this.banner.title = document.data.title[0].text;
-                        this.banner.subtitle = document.data.subtitle[0].text;
-                        this.banner.bgImg = document.data.bgImg.url;
-                        this.banner.bgVideo1 = document.data.bgVideo1.url;
-                        this.banner.bgVideo2 = document.data.bgVideo2.url;
-                        this.section1 = document.data.section[0];
-                        this.section2 = document.data.section[1];
-                        this.section3 = document.data.section[2];
-                        this.icons = document.data.icons;
+                        self.banner.title = document.data.title[0].text;
+                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.bgImg = document.data.bgImg.url;
+                        self.banner.bgVideo1 = document.data.bgVideo1.url;
+                        self.banner.bgVideo2 = document.data.bgVideo2.url;
+                        self.section1 = document.data.section[0];
+                        self.section2 = document.data.section[1];
+                        self.section3 = document.data.section[2];
+                        self.icons = document.data.icons;
                     })
-                }
+                },
         },
         created () {
             this.getContent();
-        },
-        components: {
-            Banner
         }
     }
 </script>
