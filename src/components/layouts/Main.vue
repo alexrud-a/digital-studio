@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <keep-alive>
+        <keep-alive :exclude="'Solution'">
             <router-view></router-view>
         </keep-alive>
     </div>

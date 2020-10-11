@@ -40,7 +40,16 @@
                                 <router-link
                                         class="header__menu-link"
                                         :to="{name: 'Solutions'}">
-                                    Решения
+                                    Услуги
+                                </router-link>
+                            </span>
+                        </li>
+                        <li class="header__menu-item">
+                            <span @click="toggleMenu">
+                                <router-link
+                                        class="header__menu-link"
+                                        :to="{name: 'Team'}">
+                                    Наша команда
                                 </router-link>
                             </span>
                         </li>
