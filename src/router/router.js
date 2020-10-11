@@ -4,6 +4,8 @@ import Home from "../components/home/Home";
 import Projects from "../components/projects/Projects";
 import Solutions from "../components/solutions/Solutions";
 import Contact from "../components/contact/Contact";
+import Team from "../components/team/Team";
+import Solution from "../components/solutions/Solution";
 
 Vue.use(Router);
 
@@ -29,6 +31,17 @@ let router = new Router({
             path: '/contact',
             name: 'Contact',
             component: Contact
+        },
+        {
+            path: '/team',
+            name: 'Team',
+            component: Team
+        },
+        {
+            path: '/solutions/:name',
+            name: 'Solution',
+            component: Solution,
+            props: true,
         },
     ]
 });

@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="contact__form-item">
                                         <div class="contact__form-control">
-                                            <textarea class="inp-control" placeholder="Что вас интересует?"></textarea>
+                                            <textarea class="inp-control" placeholder="Чем можем Вам помочь?" v-model="text"></textarea>
                                             <button class="btn" type="submit">
                                                 Отправить
                                             </button>
@@ -116,6 +116,7 @@
                 name: '',
                 phone: '',
                 email: '',
+                text: '',
                 message: '',
             }
         },
@@ -154,13 +155,13 @@
         },
         validators: {
             name: function (value) {
-                return Validator.value(value).required('Поле обязательно для заполнения').minLength(5, 'Введите не менее 5 символов');
+                return Validator.value(value).minLength(5, 'Введите не менее 5 символов');
             },
             phone: function (value) {
                 return Validator.value(value).required('Поле обязательно для заполнения').length(18, 'Поле телефон должно содержать 10 цифр');
             },
             email: function (value) {
-                return Validator.value(value).required('Поле обязательно для заполнения').email('Некорректный email');
+                return Validator.value(value).email('Некорректный email');
             },
         },
         methods: {
@@ -172,6 +173,7 @@
                             self.name = '';
                             self.phone = '';
                             self.email = '';
+                            self.text = '';
                             self.message = 'Спасибо! Мы скоро свяжемся с Вами!'
                         }
                     });
