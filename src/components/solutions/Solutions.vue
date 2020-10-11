@@ -6,13 +6,13 @@
                 <div class="row align-items-center">
                     <div class="col-sm-12">
                         <span class="subtitle subtitle--left">
-                            {{section1.subtitle[0].text}}
+                            {{section1.subtitle}}
                         </span>
                         <h2 class="title title--section title--left title--mini">
-                            {{section1.title[0].text}}
+                            {{section1.title}}
                         </h2>
-                        <p class="text text--mini">
-                            {{section1.text[0].text}}
+                        <p class="text text--mini columns-2">
+                            {{section1.text}}
                         </p>
                     </div>
                 </div>
@@ -23,13 +23,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{section2.subtitle[0].text}}
+                            {{section2.subtitle}}
                         </span>
                         <h2 class="title title--section">
-                            {{section2.title[0].text}}
+                            {{section2.title}}
                         </h2>
                         <p class="text text--center">
-                            {{section2.text[0].text}}
+                            {{section2.text}}
                         </p>
                     </div>
                 </div>
@@ -45,8 +45,8 @@
                                 {{icon.title[0].text}}
                             </h4>
                             <span class="icons__text">
-                                    {{icon.text[0].text}}
-                                </span>
+                                {{icon.text[0].text}}
+                            </span>
                         </a>
                     </div>
                 </div>
@@ -66,24 +66,41 @@
         data () {
             return {
                 banner: {
-                    title: null,
-                    subtitle: null,
-                    bgImg: null,
+                    title: '',
+                    subtitle: '',
+                    bgImg: '',
                 },
-                section1: null,
-                section2: null,
-                icons: null,
+                section1: {
+                    subtitle: '',
+                    title: '',
+                    text: ''
+                },
+                section2: {
+                    subtitle: '',
+                    title: '',
+                    text: ''
+                },
+                icons: {},
             };
         },
         methods: {
             getContent () {
-                this.$prismic.client.getSingle('solutions')
+                let self = this;
+                self.$prismic.client.getSingle('solutions')
                     .then((document) => {
-                        this.banner.title = document.data.title[0].text;
-                        this.banner.subtitle = document.data.subtitle[0].text;
-                        this.banner.bgImg = document.data.bgImg.url;
-                        this.section1 = document.data.section[0];
-                        this.section2 = document.data.section[1];
+                        self.banner.title = document.data.title[0].text;
+                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.bgImg = document.data.bgImg.url;
+                        self.section1 = {
+                            title: document.data.section[0].title[0].text,
+                            subtitle: document.data.section[0].subtitle[0].text,
+                            text: document.data.section[0].text[0].text
+                        };
+                        self.section2 = {
+                            title: document.data.section[1].title[0].text,
+                            subtitle: document.data.section[1].subtitle[0].text,
+                            text: document.data.section[1].text[0].text
+                        };
                     });
             },
             getIcons () {
@@ -93,13 +110,13 @@
                     });
             }
         },
-        created () {
+        created() {
             this.getContent();
             this.getIcons();
         }
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>

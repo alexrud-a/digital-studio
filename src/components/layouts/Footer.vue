@@ -25,5 +25,6 @@
         color: #fff;
         padding: 60px 40px;
         text-align: center;
+        flex: 0 0 auto;
     }
 </style>
