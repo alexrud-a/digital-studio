@@ -37,7 +37,10 @@
             <div class="container-fluid p-0">
                 <div class="icons">
                     <div v-for="(icon, index) in icons" :key="index" class="icons__item">
-                        <a :href="icon.link.tags[0]" class="link">
+                        <router-link
+                                :to="{name: 'Solution', params: { name: icon.link.slug }}"
+                                class="link"
+                        >
                             <svg>
                                 <use :href="'img/icons.svg#icon'+index"></use>
                             </svg>
@@ -45,9 +48,9 @@
                                 {{icon.title[0].text}}
                             </h4>
                             <span class="icons__text">
-                                {{icon.text[0].text}}
-                            </span>
-                        </a>
+                                    {{icon.text[0].text}}
+                                </span>
+                        </router-link>
                     </div>
                 </div>
             </div>
