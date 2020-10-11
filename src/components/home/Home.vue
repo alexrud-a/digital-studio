@@ -6,13 +6,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{section1.subtitle[0].text}}
+                            {{section1.subtitle}}
                         </span>
                         <h2 class="title title--section">
-                            {{section1.title[0].text}}
+                            {{section1.title}}
                         </h2>
                         <p class="text text--center">
-                            {{section1.text[0].text}}
+                            {{section1.text}}
                         </p>
                     </div>
                 </div>
@@ -40,15 +40,15 @@
                 <div class="row align-items-center">
                     <div class="col-md-6 col-sm-12">
                         <span class="subtitle subtitle--left">
-                            {{section2.subtitle[0].text}}
+                            {{section2.subtitle}}
                         </span>
                         <h2 class="title title--section title--left title--mini">
-                            {{section2.title[0].text}}
+                            {{section2.title}}
                         </h2>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <p class="text text--mini">
-                            {{section2.text[0].text}}
+                            {{section2.text}}
                         </p>
                     </div>
                 </div>
@@ -69,13 +69,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{section3.subtitle[0].text}}
+                            {{section3.subtitle}}
                         </span>
                         <h2 class="title title--section">
-                            {{section3.title[0].text}}
+                            {{section3.title}}
                         </h2>
                         <p class="text text--center">
-                            {{section3.text[0].text}}
+                            {{section3.text}}
                         </p>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
 </template>
 
 <script>
-    import Banner from "../layouts/Banner";
+    import Banner from "../layouts/Banner"
 
     export default {
         name: "Home",
@@ -107,9 +107,21 @@
                     bgVideo1: '',
                     bgVideo2: '',
                 },
-                section1: {},
-                section2: {},
-                section3: {},
+                section1: {
+                    subtitle: '',
+                    title: '',
+                    text: ''
+                },
+                section2: {
+                    subtitle: '',
+                    title: '',
+                    text: ''
+                },
+                section3: {
+                    subtitle: '',
+                    title: '',
+                    text: ''
+                },
                 icons: {},
                 clients: 24,
             };
@@ -127,16 +139,28 @@
                         self.banner.bgImg = document.data.bgImg.url;
                         self.banner.bgVideo1 = document.data.bgVideo1.url;
                         self.banner.bgVideo2 = document.data.bgVideo2.url;
-                        self.section1 = document.data.section[0];
-                        self.section2 = document.data.section[1];
-                        self.section3 = document.data.section[2];
+                        self.section1 = {
+                            title: document.data.section[0].title[0].text,
+                            subtitle: document.data.section[0].subtitle[0].text,
+                            text: document.data.section[0].text[0].text
+                        };
+                        self.section2 = {
+                            title: document.data.section[1].title[0].text,
+                            subtitle: document.data.section[1].subtitle[0].text,
+                            text: document.data.section[1].text[0].text
+                        };
+                        self.section3 = {
+                            title: document.data.section[2].title[0].text,
+                            subtitle: document.data.section[2].subtitle[0].text,
+                            text: document.data.section[2].text[0].text
+                        }
                         self.icons = document.data.icons;
                     })
                 },
         },
         created () {
             this.getContent();
-        }
+        },
     }
 </script>
 

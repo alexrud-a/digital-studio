@@ -44,6 +44,15 @@
                                 </router-link>
                             </span>
                         </li>
+                        <li class="header__menu-item">
+                            <span @click="toggleMenu">
+                                <router-link
+                                        class="header__menu-link"
+                                        :to="{name: 'Contact'}">
+                                    Контакты
+                                </router-link>
+                            </span>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -52,6 +61,7 @@
 </template>
 
 <script>
+
     export default {
         name: "Header",
         data() {
@@ -66,9 +76,6 @@
                 self.isActive = !self.isActive;
             },
         },
-        created() {
-            this.isVisible = false;
-        }
     }
 </script>
 
@@ -80,6 +87,7 @@
         right: 0;
         top: 0;
         z-index: 9;
+        flex: 0 0 auto;
 
         @media screen and (min-width: $tablet) {
             padding: 50px;
