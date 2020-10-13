@@ -15,25 +15,25 @@
                         </p>
                     </div>
                     <div class="col-sm-12">
-                        <form class="contact__form" @submit.prevent="submit">
+                        <form class="contact__form" method="post" action="mail.php" @submit.prevent="submit">
                             <div class="container">
                                 <div class="row">
                                     <div class="contact__form-item">
                                         <div class="contact__form-control">
                                             <input class="inp-control" type="text" placeholder="Представьтесь" v-model="name" name="name">
-                                            <div class="message">
+                                            <div v-if="!message.length" class="message">
                                                 {{ validation.firstError('name') }}
                                             </div>
                                         </div>
                                         <div class="contact__form-control">
                                             <input class="inp-control" type="tel" placeholder="Ваш Телефон" v-mask="'+7 (###) ###-##-##'" v-model="phone" name="phone">
-                                            <div class="message">
+                                            <div v-if="!message.length" class="message">
                                                 {{ validation.firstError('phone') }}
                                             </div>
                                         </div>
                                         <div class="contact__form-control">
                                             <input class="inp-control" type="email" placeholder="Ваш Email" v-model="email" name="email">
-                                            <div class="message">
+                                            <div v-if="!message.length" class="message">
                                                 {{ validation.firstError('email') }}
                                             </div>
                                         </div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="message">
+                        <div class="message-form">
                             {{message}}
                         </div>
                     </div>
@@ -166,23 +166,34 @@
             },
         },
         methods: {
+            mail: function() {
+                let self = this;
+                axios({
+                    method: 'post',
+                    url: 'mail.php',
+                    data: {
+                        name: self.name,
+                        phone: self.phone,
+                        email: self.email,
+                        text: self.text
+                    },
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                }).then(function (response) {
+                    self.message = response.data;
+                    self.name = '';
+                    self.phone = '';
+                    self.email = '';
+                    self.text = '';
+                });
+            },
             submit: function() {
                 let self = this;
                 self.$validate()
                     .then(function(success) {
                         if (success) {
-                            axios.post('mail.php', {
-                                name: this.name,
-                                phone: this.phone,
-                                email: this.email,
-                                text: this.text
-                            }).then(function (response) {
-                                self.message = response.data
-                            });
-                            self.name = '';
-                            self.phone = '';
-                            self.email = '';
-                            self.text = '';
+                            self.mail();
                         }
                     });
             },
@@ -262,6 +273,14 @@
             -webkit-filter: grayscale(1);
             -moz-filter: grayscale(1);
             -o-filter: grayscale(1);
+        }
+
+        .message-form {
+            text-align: center;
+            color: $accent-color;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 30px;
         }
     }
 </style>
