@@ -35,16 +35,19 @@
                 </div>
             </div>
         </section>
+        <FooterTop/>
     </div>
 </template>
 
 <script>
     import Banner from "../layouts/Banner";
+    import FooterTop from "../layouts/FooterTop";
 
     export default {
         name: "Solution",
         components: {
-            Banner
+            Banner,
+            FooterTop
         },
         data () {
             return {
@@ -96,5 +99,4 @@
 </script>
 
 <style lang="scss">
-
 </style>

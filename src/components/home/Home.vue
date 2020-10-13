@@ -93,11 +93,13 @@
                 </div>
             </div>
         </section>
+        <FooterTop/>
     </div>
 </template>
 
 <script>
     import Banner from "../layouts/Banner"
+    import FooterTop from "../layouts/FooterTop";
 
     export default {
         name: "Home",
@@ -130,6 +132,7 @@
             };
         },
         components: {
+            FooterTop,
             Banner,
         },
         methods: {
@@ -168,6 +171,12 @@
 </script>
 
 <style lang="scss">
+    .home {
+        .banner {
+            height: 100vh;
+        }
+    }
+
     .icons {
         display: flex;
         flex-wrap: wrap;

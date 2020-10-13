@@ -60,7 +60,7 @@
 
 <style lang="scss">
     .banner {
-        height: 100vh;
+        height: 40vh;
         display: flex;
         justify-content: center;
         align-items: center;

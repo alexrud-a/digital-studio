@@ -20,19 +20,19 @@
                                 <div class="row">
                                     <div class="contact__form-item">
                                         <div class="contact__form-control">
-                                            <input class="inp-control" type="text" placeholder="Представьтесь" v-model="name">
+                                            <input class="inp-control" type="text" placeholder="Представьтесь" v-model="name" name="name">
                                             <div class="message">
                                                 {{ validation.firstError('name') }}
                                             </div>
                                         </div>
                                         <div class="contact__form-control">
-                                            <input class="inp-control" type="tel" placeholder="Ваш Телефон" v-mask="'+7 (###) ###-##-##'" v-model="phone">
+                                            <input class="inp-control" type="tel" placeholder="Ваш Телефон" v-mask="'+7 (###) ###-##-##'" v-model="phone" name="phone">
                                             <div class="message">
                                                 {{ validation.firstError('phone') }}
                                             </div>
                                         </div>
                                         <div class="contact__form-control">
-                                            <input class="inp-control" type="email" placeholder="Ваш Email" v-model="email">
+                                            <input class="inp-control" type="email" placeholder="Ваш Email" v-model="email" name="email">
                                             <div class="message">
                                                 {{ validation.firstError('email') }}
                                             </div>
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="contact__form-item">
                                         <div class="contact__form-control">
-                                            <textarea class="inp-control" placeholder="Чем можем Вам помочь?" v-model="text"></textarea>
+                                            <textarea class="inp-control" placeholder="Чем можем Вам помочь?" v-model="text" name="text"></textarea>
                                             <button class="btn" type="submit">
                                                 Отправить
                                             </button>
@@ -107,6 +107,7 @@
     import SimpleVueValidator from 'simple-vue-validator';
     const Validator = SimpleVueValidator.Validator;
     import { loadYmap } from 'vue-yandex-maps'
+    import axios from "axios";
 
     export default {
         mixins: [SimpleVueValidator.mixin],
@@ -167,14 +168,21 @@
         methods: {
             submit: function() {
                 let self = this;
-                this.$validate()
+                self.$validate()
                     .then(function(success) {
                         if (success) {
+                            axios.post('mail.php', {
+                                name: this.name,
+                                phone: this.phone,
+                                email: this.email,
+                                text: this.text
+                            }).then(function (response) {
+                                self.message = response.data
+                            });
                             self.name = '';
                             self.phone = '';
                             self.email = '';
                             self.text = '';
-                            self.message = 'Спасибо! Мы скоро свяжемся с Вами!'
                         }
                     });
             },
