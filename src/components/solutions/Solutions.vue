@@ -56,7 +56,7 @@
             </div>
         </section>
         <FooterTop/>
-        <Preloader :isLoad="isLoad"
+        <Preloader :isLoad="isLoad"/>
     </div>
 </template>
 
