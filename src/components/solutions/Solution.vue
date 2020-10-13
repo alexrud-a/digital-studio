@@ -83,7 +83,6 @@
                     self.$prismic.Predicates.at('document.tags', [self.$route.params.name])
                 )
                     .then((response) => {
-                        console.log(response);
                         self.banner.title = response.results[0].data.title[0].text;
                         self.banner.subtitle = response.results[0].data.subtitle[0].text;
                         self.banner.bgImg = response.results[0].data.bgImg.url;
