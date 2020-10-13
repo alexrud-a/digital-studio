@@ -141,7 +141,7 @@
                 //this.$refs.thumbnails.goToNext(index);
             },
             showCurrentSlide (event) {
-                this.activeSlide = event.currentSlide;
+                this.activeSlide = event.nextSlide;
             }
         },
         created () {
