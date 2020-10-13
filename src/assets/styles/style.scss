@@ -256,6 +256,16 @@ $desktop: 1200px;
       background-color: $accent-color;
       color: #fff;
     }
+
+    &--white {
+      border: 4px solid #fff;
+      color: #fff;
+
+      &:hover {
+        background-color: #fff;
+        color: $accent-color;
+      }
+    }
   }
 
   .section {

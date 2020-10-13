@@ -48,23 +48,26 @@
                                 {{icon.title[0].text}}
                             </h4>
                             <span class="icons__text">
-                                    {{icon.text[0].text}}
-                                </span>
+                                {{icon.text[0].text}}
+                            </span>
                         </router-link>
                     </div>
                 </div>
             </div>
         </section>
+        <FooterTop/>
     </div>
 </template>
 
 <script>
     import Banner from "../layouts/Banner";
+    import FooterTop from "../layouts/FooterTop";
 
     export default {
         name: "Solutions",
         components: {
-            Banner
+            Banner,
+            FooterTop
         },
         data () {
             return {

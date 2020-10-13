@@ -1,11 +1,14 @@
 <template>
     <div class="projects">
         <Banner :banner="banner"/>
+        <FooterTop/>
     </div>
 </template>
 
 <script>
     import Banner from "../layouts/Banner";
+    import FooterTop from "../layouts/FooterTop";
+
     export default {
         name: "Projects",
         data () {
@@ -33,6 +36,7 @@
         },
         components: {
             Banner,
+            FooterTop
         }
     }
 </script>

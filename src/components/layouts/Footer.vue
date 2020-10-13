@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
         <div class="container">
-            <div class="copyright">
+            <div class="footer__copyright">
                 Все права защищены © {{getYear}} <router-link :to="{name: 'Home'}" class="link">Digital-studio</router-link>
             </div>
         </div>
@@ -23,7 +23,7 @@
     .footer {
         background-color: #000;
         color: #fff;
-        padding: 60px 40px;
+        padding: 160px 40px 60px;
         text-align: center;
         flex: 0 0 auto;
     }
