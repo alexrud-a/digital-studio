@@ -94,17 +94,20 @@
             </div>
         </section>
         <FooterTop/>
+        <Preloader :isLoad="isLoad"/>
     </div>
 </template>
 
 <script>
     import Banner from "../layouts/Banner"
     import FooterTop from "../layouts/FooterTop";
+    import Preloader from "../layouts/Preloader";
 
     export default {
         name: "Home",
         data () {
             return {
+                isLoad: false,
                 banner: {
                     title: '',
                     subtitle: '',
@@ -132,10 +135,15 @@
             };
         },
         components: {
+            Preloader,
             FooterTop,
             Banner,
         },
         methods: {
+            loading: function () {
+                let self = this;
+                self.isLoad = true
+            },
             getContent () {
                 let self = this;
                 self.$prismic.client.getSingle('home')
@@ -161,6 +169,7 @@
                             text: document.data.section[2].text[0].text
                         }
                         self.icons = document.data.icons;
+                        setTimeout(this.loading, 1000);
                     })
                 },
         },

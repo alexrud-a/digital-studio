@@ -29,7 +29,7 @@ export default {
     $route() {
       this.$refs.scroll.$el.scrollTop = 0;
     }
-  }
+  },
 }
 </script>
 
