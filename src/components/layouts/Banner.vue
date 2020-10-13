@@ -60,7 +60,7 @@
 
 <style lang="scss">
     .banner {
-        height: 40vh;
+        height: 60vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -68,6 +68,10 @@
         position: relative;
         color: #fff;
         padding: 15px;
+
+        @media screen and (min-width: $tablet) {
+            height: 40vh;
+        }
 
         &::before {
             content: "";

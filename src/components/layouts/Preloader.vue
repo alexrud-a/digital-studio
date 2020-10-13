@@ -34,7 +34,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(#fff, 0.7);
+        background-color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
