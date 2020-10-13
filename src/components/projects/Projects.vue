@@ -1,5 +1,6 @@
 <template>
     <div class="projects">
+        <Preloader isLoad="isLoad"/>
         <Banner :banner="banner"/>
         <FooterTop/>
     </div>
@@ -8,11 +9,13 @@
 <script>
     import Banner from "../layouts/Banner";
     import FooterTop from "../layouts/FooterTop";
+    import Preloader from "../layouts/Preloader";
 
     export default {
         name: "Projects",
         data () {
             return {
+                isLoad: false,
                 banner: {
                     title: '',
                     subtitle: '',
@@ -21,6 +24,10 @@
             };
         },
         methods: {
+            loading: function () {
+                let self = this;
+                self.isLoad = true
+            },
             getContent () {
                 let self = this;
                 self.$prismic.client.getSingle('projects')
@@ -28,6 +35,7 @@
                         self.banner.title = document.data.title[0].text;
                         self.banner.subtitle = document.data.subtitle[0].text;
                         self.banner.bgImg = document.data.bgImg.url;
+                        setTimeout(this.loading, 1000);
                     })
             }
         },
@@ -36,7 +44,8 @@
         },
         components: {
             Banner,
-            FooterTop
+            FooterTop,
+            Preloader
         }
     }
 </script>

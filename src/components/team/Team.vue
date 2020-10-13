@@ -74,20 +74,24 @@
                 </div>
             </div>
         </section>
+        <Preloader :isLoad="isLoad" />
     </div>
 </template>
 
 <script>
     import Banner from "../layouts/Banner";
     import { VueAgile } from 'vue-agile';
+    import Preloader from "../layouts/Preloader";
     export default {
         name: "Team",
         components: {
             Banner,
-            VueAgile
+            VueAgile,
+            Preloader
         },
         data () {
             return {
+                isLoad: false,
                 banner: {
                     title: '',
                     subtitle: '',
@@ -120,6 +124,10 @@
             };
         },
         methods: {
+            loading: function () {
+                let self = this;
+                self.isLoad = true
+            },
             getContent () {
                 let self = this;
                 self.$prismic.client.getSingle('team')
@@ -134,11 +142,11 @@
                         };
                         self.icons = document.data.icons;
                         self.slider = document.data.slider;
+                        setTimeout(this.loading, 1000);
                     })
             },
             slideGo(index) {
                 this.$refs.main.goToNext(index);
-                //this.$refs.thumbnails.goToNext(index);
             },
             showCurrentSlide (event) {
                 this.activeSlide = event.nextSlide;

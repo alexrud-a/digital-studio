@@ -100,6 +100,7 @@
                 </div>
             </div>
         </section>
+        <Preloader :isLoad="isLoad"/>
     </div>
 </template>
 
@@ -108,18 +109,23 @@
     const Validator = SimpleVueValidator.Validator;
     import { loadYmap } from 'vue-yandex-maps'
     import axios from "axios";
+    import Preloader from "../layouts/Preloader";
 
     export default {
         mixins: [SimpleVueValidator.mixin],
         name: "Contact",
         data() {
             return {
+                isLoad: false,
                 name: '',
                 phone: '',
                 email: '',
                 text: '',
                 message: '',
             }
+        },
+        components: {
+            Preloader
         },
         async mounted() {
             const settings = {
@@ -166,6 +172,10 @@
             },
         },
         methods: {
+            loading: function () {
+                let self = this;
+                self.isLoad = true
+            },
             mail: function() {
                 let self = this;
                 axios({
@@ -197,6 +207,9 @@
                         }
                     });
             },
+        },
+        created() {
+            setTimeout(this.loading, 1000);
         }
     }
 </script>

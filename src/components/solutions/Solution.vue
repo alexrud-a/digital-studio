@@ -36,21 +36,25 @@
             </div>
         </section>
         <FooterTop/>
+        <Preloader :isLoad="isLoad"/>
     </div>
 </template>
 
 <script>
     import Banner from "../layouts/Banner";
     import FooterTop from "../layouts/FooterTop";
+    import Preloader from "../layouts/Preloader";
 
     export default {
         name: "Solution",
         components: {
             Banner,
-            FooterTop
+            FooterTop,
+            Preloader,
         },
         data () {
             return {
+                isLoad: false,
                 banner: {
                     title: '',
                     subtitle: '',
@@ -69,6 +73,10 @@
             };
         },
         methods: {
+            loading: function () {
+                let self = this;
+                self.isLoad = true
+            },
             getContent () {
                 let self = this;
                 self.$prismic.client.query(
@@ -89,6 +97,7 @@
                             subtitle: response.results[0].data.section[1].subtitle[0].text,
                             text: response.results[0].data.section[1].text[0].text
                         };
+                        setTimeout(this.loading, 1000);
                     });
             },
         },
