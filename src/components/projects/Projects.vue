@@ -62,6 +62,7 @@
         name: "Projects",
         data () {
             return {
+                activeCat: 'all',
                 isLoad: false,
                 banner: {
                     title: '',
@@ -75,7 +76,6 @@
                 projects: [],
                 categories: [],
                 filtered: [],
-                activeCat: 'all'
             };
         },
         metaInfo: {
@@ -91,8 +91,8 @@
             },
             sortByCat(cat) {
                 this.filtered = this.projects;
-                this.activeCat = cat;
                 if (cat && cat != 'all') {
+                    this.activeCat = cat;
                     this.filtered = this.projects.filter(function (item) {
                         return item.data.category == cat;
                     });
