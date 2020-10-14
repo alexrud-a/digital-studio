@@ -78,6 +78,12 @@
                 activeCat: 'all'
             };
         },
+        metaInfo: {
+            title: 'Digital studio - Projects',
+            meta: [
+                { name: 'description', content: 'Digital studio' }
+            ],
+        },
         methods: {
             loading: function () {
                 let self = this;

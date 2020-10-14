@@ -93,6 +93,12 @@
                 icons: {},
             };
         },
+        metaInfo: {
+            title: 'Digital studio - Solutions',
+            meta: [
+                { name: 'description', content: 'Digital studio' }
+            ],
+        },
         methods: {
             loading: function () {
                 let self = this;

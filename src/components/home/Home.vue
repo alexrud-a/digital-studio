@@ -134,6 +134,12 @@
                 clients: 24,
             };
         },
+        metaInfo: {
+            title: 'Digital studio - Home',
+            meta: [
+                { name: 'description', content: 'Digital studio' }
+            ],
+        },
         components: {
             Preloader,
             FooterTop,

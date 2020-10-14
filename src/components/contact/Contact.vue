@@ -124,6 +124,12 @@
                 message: '',
             }
         },
+        metaInfo: {
+            title: 'Digital studio - Contacts',
+            meta: [
+                { name: 'description', content: 'Digital studio' }
+            ],
+        },
         components: {
             Preloader
         },
