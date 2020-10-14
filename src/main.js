@@ -34,6 +34,12 @@ Vue.use(PrismicVue, {
   endpoint: "https://digitaltudio.cdn.prismic.io/api/v2",
 });
 
+
+import VueMeta from 'vue-meta'
+Vue.use(VueMeta, {
+  refreshOnceOnNavigation: true
+})
+
 Vue.config.productionTip = false
 
 new Vue({

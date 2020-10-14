@@ -123,6 +123,12 @@
                 activeSlide: 0,
             };
         },
+        metaInfo: {
+            title: 'Digital studio - Team',
+            meta: [
+                { name: 'description', content: 'Digital studio' }
+            ],
+        },
         methods: {
             loading: function () {
                 let self = this;

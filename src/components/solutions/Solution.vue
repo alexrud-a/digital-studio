@@ -72,6 +72,12 @@
                 },
             };
         },
+        metaInfo: {
+            title: '',
+            meta: [
+                { name: 'description', content: 'Digital studio' }
+            ],
+        },
         methods: {
             loading: function () {
                 let self = this;
@@ -96,6 +102,7 @@
                             subtitle: response.results[0].data.section[1].subtitle[0].text,
                             text: response.results[0].data.section[1].text[0].text
                         };
+                        self.metaInfo.title = response.results[0].data.section[1].title[0].text,
                         setTimeout(this.loading, 1000);
                     });
             },
