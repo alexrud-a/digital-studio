@@ -73,7 +73,7 @@
             };
         },
         metaInfo: {
-            title: '',
+            title: 'Digital studio - Solution',
             meta: [
                 { name: 'description', content: 'Digital studio' }
             ],
@@ -102,7 +102,6 @@
                             subtitle: response.results[0].data.section[1].subtitle[0].text,
                             text: response.results[0].data.section[1].text[0].text
                         };
-                        self.metaInfo.title = response.results[0].data.section[1].title[0].text,
                         setTimeout(this.loading, 1000);
                     });
             },

@@ -203,6 +203,7 @@
             font-size: 14px;
             line-height: 14px;
             margin-right: 10px;
+            margin-bottom: 10px;
             cursor: pointer;
 
             &--active {
