@@ -39,7 +39,7 @@
                 <div class="icons">
                     <div v-for="(icon, index) in icons" :key="index" class="icons__item">
                         <router-link
-                                :to="{name: 'Solution', params: { name: icon.link.slug }}"
+                                :to="{name: 'Solution', params: { name: icon.link.tags[0] }}"
                                 class="link"
                         >
                             <svg>
