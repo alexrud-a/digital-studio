@@ -158,9 +158,8 @@ $desktop: 1200px;
   }
 
   .title {
-    font-size: 44px;
+    font-size: 40px;
     line-height: 1;
-    letter-spacing: -2px;
     text-transform: uppercase;
     position: relative;
     padding-bottom: 20px;
@@ -263,6 +262,22 @@ $desktop: 1200px;
 
       &:hover {
         background-color: #fff;
+        color: $accent-color;
+      }
+    }
+
+    &--banner {
+      background-color: $accent-color;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 14px;
+
+      @media screen and (min-width: $tablet) {
+        font-size: 18px;
+      }
+
+      &:hover {
+        background-color: transparent;
         color: $accent-color;
       }
     }

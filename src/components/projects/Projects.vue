@@ -100,6 +100,7 @@
                     });
                 }
                 else {
+                    this.activeCat = 'all';
                     this.filtered = this.projects;
                 }
             },
@@ -160,6 +161,16 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+
+            &:before {
+                position: absolute;
+                content: "";
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+            }
 
             img {
                 width: 100%;

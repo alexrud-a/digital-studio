@@ -33,6 +33,12 @@
                     <h1 class="title banner__title">
                         {{banner.title}}
                     </h1>
+                    <router-link
+                            v-if="isHome"
+                            class="btn btn--banner btn-lg mt-5"
+                            :to="{name: 'Contact'}">
+                        Бесплатная консультация
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -54,6 +60,12 @@
                     return {}
                 }
             },
+            isHome: {
+                type: Boolean,
+                default() {
+                    return false
+                }
+            }
         },
     }
 </script>

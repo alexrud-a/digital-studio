@@ -1,7 +1,7 @@
 <template>
     <transition name="slide-fade">
         <div class="home">
-        <Banner :banner="banner"/>
+        <Banner :banner="banner" :isHome="isHome"/>
         <section class="section section--gray pb-0">
             <div class="container">
                 <div class="row">
@@ -60,9 +60,11 @@
                     <div class="col-sm-12">
                         <div class="mini-banner">
                             <img src="/img/banner_bg.jpeg" class="mini-banner__img">
-                            <a href="#" class="mini-banner__link">
-                                Learn more
-                            </a>
+                            <router-link
+                                    class="mini-banner__link"
+                                    :to="{name: 'Solutions'}">
+                                Выбрать услугу
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -109,6 +111,7 @@
         name: "Home",
         data () {
             return {
+                isHome: true,
                 isLoad: false,
                 banner: {
                     title: '',
