@@ -3,8 +3,8 @@
         <div class="footer-top__form-wrap">
             <div class="container">
                 <div class="footer-top__form">
-                    <p class="text">
-                        Получи бесплатную консультацию
+                    <p class="text footer-top__text">
+                        Мы готовы бесплатно проконсультировать вас по задачам, связанным с разработкой сайтов, или провести аудит существующих проектов.
                     </p>
                     <router-link :to="{name: 'Contact'}"
                                  class="btn btn--white"
@@ -40,6 +40,15 @@
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
+        }
+
+        &__text {
+            text-align: center;
+
+            @media screen and (min-width: $desktop) {
+                font-size: 24px!important;
+                width: 50%;
+            }
         }
     }
 </style>
