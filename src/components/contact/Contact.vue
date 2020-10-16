@@ -1,5 +1,6 @@
 <template>
-    <div class="contact">
+    <transition name="slide-fade">
+        <div class="contact">
         <section class="section">
             <div class="container">
                 <div class="row">
@@ -102,6 +103,7 @@
         </section>
         <Preloader :isLoad="isLoad"/>
     </div>
+    </transition>
 </template>
 
 <script>

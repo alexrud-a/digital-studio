@@ -1,5 +1,6 @@
 <template>
-    <div class="projects">
+    <transition name="slide-fade">
+        <div class="projects">
         <Preloader :isLoad="isLoad"/>
         <Banner :banner="banner"/>
         <section class="section">
@@ -51,6 +52,7 @@
         </section>
         <FooterTop/>
     </div>
+    </transition>
 </template>
 
 <script>

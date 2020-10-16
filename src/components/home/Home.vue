@@ -1,5 +1,6 @@
 <template>
-    <div class="home">
+    <transition name="slide-fade">
+        <div class="home">
         <Banner :banner="banner"/>
         <section class="section section--gray pb-0">
             <div class="container">
@@ -96,6 +97,7 @@
         <FooterTop/>
         <Preloader :isLoad="isLoad"/>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -186,6 +188,19 @@
 </script>
 
 <style lang="scss">
+    .slide-fade-enter-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        filter: grayscale(1);
+    }
+    .slide-fade-leave-active {
+        transition: all .10s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        filter: grayscale(1);
+        opacity: 0;
+    }
+    .slide-fade-enter, .slide-fade-leave-to {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        opacity: 0;
+    }
     .home {
         .banner {
             height: 100vh;

@@ -1,5 +1,6 @@
 <template>
-    <div class="team">
+    <transition name="slide-fade">
+        <div class="team">
         <Banner :banner="banner"/>
         <section class="section">
             <div class="container-fluid p-0">
@@ -76,6 +77,7 @@
         </section>
         <Preloader :isLoad="isLoad" />
     </div>
+    </transition>
 </template>
 
 <script>
