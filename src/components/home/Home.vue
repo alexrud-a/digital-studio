@@ -218,7 +218,7 @@
         &__item {
             width: 50%;
             text-align: center;
-            padding: 20px 20px 40px;
+            padding: 20px 10px 40px;
             transition: all .3s linear;
 
             &:first-child,
@@ -288,6 +288,11 @@
         &__text {
             font-weight: 400;
             color: $base-color;
+            font-size: 14px;
+
+            @media screen and (min-width: $tablet) {
+                font-size: 18px;
+            }
 
             @media screen and (min-width: $desktop) {
                 opacity: 0;
