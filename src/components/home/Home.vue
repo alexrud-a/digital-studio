@@ -22,7 +22,7 @@
                 <div class="icons">
                     <div v-for="(icon, index) in icons" :key="index" class="icons__item">
                         <router-link
-                                :to="{name: 'Solution', params: { name: icon.link.slug }}"
+                                :to="{name: 'Solution', params: { name: icon.link.tags[0] }}"
                                 class="link"
                         >
                             <svg>
@@ -32,8 +32,8 @@
                                 {{icon.title[0].text}}
                             </h4>
                             <span class="icons__text">
-                                    {{icon.text[0].text}}
-                                </span>
+                                {{icon.text[0].text}}
+                            </span>
                         </router-link>
                     </div>
                 </div>
