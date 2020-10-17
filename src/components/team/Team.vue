@@ -12,9 +12,7 @@
                             <h2 class="title title--section title--left title--mini">
                                 {{ $prismic.richTextAsPlain(section.title) }}
                             </h2>
-                            <p class="text text--mini">
-                                <prismic-rich-text :field="section.text"/>
-                           </p>
+                            <prismic-rich-text :field="section.text" class="text text--mini"/>
                         </div>
                     </div>
                 </div>
@@ -30,8 +28,8 @@
                                 {{ $prismic.richTextAsPlain(icon.title) }}
                             </h4>
                             <span class="icons__text">
-                            {{ $prismic.richTextAsPlain(icon.text) }}
-                        </span>
+                                {{ $prismic.richTextAsPlain(icon.text) }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -49,9 +47,7 @@
                                         <h2 class="title">
                                             {{ $prismic.richTextAsPlain(slide.title) }}
                                         </h2>
-                                        <p class="text text--center">
-                                            <prismic-rich-text :field="slide.text"/>
-                                        </p>
+                                        <prismic-rich-text :field="slide.text" class="text text--center"/>
                                     </div>
                                 </VueAgile>
                                 <div class="container">
