@@ -1,82 +1,82 @@
 <template>
     <transition name="slide-fade">
         <div class="team">
-        <Banner :banner="banner"/>
-        <section class="section">
-            <div class="container-fluid p-0">
-                <div class="icons icons--no-hover">
-                    <div v-for="(icon, index) in icons" :key="index" class="icons__item">
-                        <svg>
-                            <use :href="'img/icons-team.svg#icon'+index"></use>
-                        </svg>
-                        <h4 class="icons__title">
-                            {{icon.title[0].text}}
-                        </h4>
-                        <span class="icons__text">
-                            {{icon.text[0].text}}
+            <Banner :banner="banner"/>
+            <section class="section">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-sm-12 columns-2">
+                            <span class="subtitle subtitle--left">
+                                {{ $prismic.richTextAsPlain(section.subtitle) }}
+                            </span>
+                            <h2 class="title title--section title--left title--mini">
+                                {{ $prismic.richTextAsPlain(section.title) }}
+                            </h2>
+                            <p class="text text--mini">
+                                <prismic-rich-text :field="section.text"/>
+                           </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="container-fluid p-0">
+                    <div class="icons icons--no-hover">
+                        <div v-for="(icon, index) in icons" :key="index" class="icons__item">
+                            <svg>
+                                <use :href="'img/icons-team.svg#icon'+index"></use>
+                            </svg>
+                            <h4 class="icons__title">
+                                {{ $prismic.richTextAsPlain(icon.title) }}
+                            </h4>
+                            <span class="icons__text">
+                            {{ $prismic.richTextAsPlain(icon.text) }}
                         </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-sm-12 columns-2">
-                        <span class="subtitle subtitle--left">
-                            {{section.subtitle}}
-                        </span>
-                        <h2 class="title title--section title--left title--mini">
-                            {{section.title}}
-                        </h2>
-                        <p class="text text--mini">
-                            {{section.text}}
-                        </p>
+            </section>
+            <section class="team__slider">
+                <div class="container-fluid">
+                    <div class="row d-flex align-items-center flex-wrap-reverse">
+                        <div class="col-lg-6 col-md-12">
+                            <template v-if="slider.length > 0">
+                                <VueAgile ref="main" :as-nav-for="[$refs.thumbnails]" :options="sliderOpt" class="team__slider-one" @before-change="showCurrentSlide($event)">
+                                    <div v-for="(slide, index) in slider" :key="index">
+                                        <span class="subtitle">
+                                            {{ $prismic.richTextAsPlain(slide.subtitle) }}
+                                        </span>
+                                        <h2 class="title">
+                                            {{ $prismic.richTextAsPlain(slide.title) }}
+                                        </h2>
+                                        <p class="text text--center">
+                                            <prismic-rich-text :field="slide.text"/>
+                                        </p>
+                                    </div>
+                                </VueAgile>
+                                <div class="container">
+                                    <div class="team__slider-dots">
+                                        <span class="team__slider-dot" v-for="(dot, index) in slider" :key="index" @click="slideGo(index)" :class="{'team__slider-dot--active' : index === activeSlide }">
+                                            {{ $prismic.richTextAsPlain(dot.nameSlide) }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="col-lg-6 col-md-12 p-0">
+                            <template v-if="slider.length > 0">
+                                <VueAgile ref="thumbnails" :as-nav-for="[$refs.main]" :options="sliderOpt" class="team__slider-two">
+                                    <div v-for="(slideThumb, index) in slider" :key="index">
+                                        <img :src="slideThumb.img.url">
+                                    </div>
+                                </VueAgile>
+                            </template>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="team__slider">
-            <div class="container-fluid">
-                <div class="row d-flex align-items-center flex-wrap-reverse">
-                    <div class="col-lg-6 col-md-12">
-                        <template v-if="slider.length > 0">
-                            <VueAgile ref="main" :as-nav-for="[$refs.thumbnails]" :options="sliderOpt" class="team__slider-one" @before-change="showCurrentSlide($event)">
-                                <div v-for="(slide, index) in slider" :key="index">
-                                    <span class="subtitle">
-                                        {{slide.subtitle[0].text}}
-                                    </span>
-                                    <h2 class="title">
-                                        {{slide.title[0].text}}
-                                    </h2>
-                                    <p class="text text--center">
-                                        {{slide.text[0].text}}
-                                    </p>
-                                </div>
-                            </VueAgile>
-                            <div class="container">
-                                <div class="team__slider-dots">
-                                    <span class="team__slider-dot" v-for="(dot, index) in slider" :key="index" @click="slideGo(index)" :class="{'team__slider-dot--active' : index === activeSlide }">
-                                        {{dot.nameSlide[0].text}}
-                                    </span>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="col-lg-6 col-md-12 p-0">
-                        <template v-if="slider.length > 0">
-                            <VueAgile ref="thumbnails" :as-nav-for="[$refs.main]" :options="sliderOpt" class="team__slider-two">
-                                <div v-for="(slideThumb, index) in slider" :key="index">
-                                    <img :src="slideThumb.img.url">
-                                </div>
-                            </VueAgile>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <Preloader :isLoad="isLoad" />
-    </div>
+            </section>
+            <Preloader :isLoad="isLoad" />
+        </div>
     </transition>
 </template>
 
@@ -140,13 +140,13 @@
                 let self = this;
                 self.$prismic.client.getSingle('team')
                     .then((document) => {
-                        self.banner.title = document.data.title[0].text;
-                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.title = document.data.title;
+                        self.banner.subtitle = document.data.subtitle;
                         self.banner.bgImg = document.data.bgImg.url;
                         self.section = {
-                            title: document.data.section[0].title[0].text,
-                            subtitle: document.data.section[0].subtitle[0].text,
-                            text: document.data.section[0].text[0].text
+                            title: document.data.section[0].title,
+                            subtitle: document.data.section[0].subtitle,
+                            text: document.data.section[0].text
                         };
                         self.icons = document.data.icons;
                         self.slider = document.data.slider;

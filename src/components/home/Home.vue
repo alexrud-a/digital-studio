@@ -7,13 +7,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{section1.subtitle}}
+                            {{ $prismic.richTextAsPlain(section1.subtitle) }}
                         </span>
                         <h2 class="title title--section">
-                            {{section1.title}}
+                            {{ $prismic.richTextAsPlain(section1.title) }}
                         </h2>
                         <p class="text text--center">
-                            {{section1.text}}
+                            <prismic-rich-text :field="section1.text"/>
                         </p>
                     </div>
                 </div>
@@ -29,10 +29,10 @@
                                 <use :href="'img/icons.svg#icon'+index"></use>
                             </svg>
                             <h4 class="icons__title">
-                                {{icon.title[0].text}}
+                                {{ $prismic.richTextAsPlain(icon.title) }}
                             </h4>
                             <span class="icons__text">
-                                {{icon.text[0].text}}
+                                {{ $prismic.richTextAsPlain(icon.text) }}
                             </span>
                         </router-link>
                     </div>
@@ -42,17 +42,17 @@
         <section class="section">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-4 col-sm-12">
                         <span class="subtitle subtitle--left">
-                            {{section2.subtitle}}
+                            {{ $prismic.richTextAsPlain(section2.subtitle) }}
                         </span>
                         <h2 class="title title--section title--left title--mini">
-                            {{section2.title}}
+                            {{ $prismic.richTextAsPlain(section2.title) }}
                         </h2>
                     </div>
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-8 col-sm-12">
                         <p class="text text--mini">
-                            {{section2.text}}
+                            <prismic-rich-text :field="section2.text"/>
                         </p>
                     </div>
                 </div>
@@ -75,14 +75,14 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{section3.subtitle}}
+                            {{ $prismic.richTextAsPlain(section3.subtitle) }}
                         </span>
                         <h2 class="title title--section">
-                            {{section3.title}}
+                            {{ $prismic.richTextAsPlain(section3.title) }}
                         </h2>
-                        <p class="text text--center">
-                            {{section3.text}}
-                        </p>
+                        <div class="text text--center">
+                            <prismic-rich-text :field="section3.text"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,25 +159,25 @@
                 let self = this;
                 self.$prismic.client.getSingle('home')
                     .then((document) => {
-                        self.banner.title = document.data.title[0].text;
-                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.title = document.data.title;
+                        self.banner.subtitle = document.data.subtitle;
                         self.banner.bgImg = document.data.bgImg.url;
                         self.banner.bgVideo1 = document.data.bgVideo1.url;
                         self.banner.bgVideo2 = document.data.bgVideo2.url;
                         self.section1 = {
-                            title: document.data.section[0].title[0].text,
-                            subtitle: document.data.section[0].subtitle[0].text,
-                            text: document.data.section[0].text[0].text
+                            title: document.data.section[0].title,
+                            subtitle: document.data.section[0].subtitle,
+                            text: document.data.section[0].text
                         };
                         self.section2 = {
-                            title: document.data.section[1].title[0].text,
-                            subtitle: document.data.section[1].subtitle[0].text,
-                            text: document.data.section[1].text[0].text
+                            title: document.data.section[1].title,
+                            subtitle: document.data.section[1].subtitle,
+                            text: document.data.section[1].text
                         };
                         self.section3 = {
-                            title: document.data.section[2].title[0].text,
-                            subtitle: document.data.section[2].subtitle[0].text,
-                            text: document.data.section[2].text[0].text
+                            title: document.data.section[2].title,
+                            subtitle: document.data.section[2].subtitle,
+                            text: document.data.section[2].text
                         }
                         self.icons = document.data.icons;
                         setTimeout(this.loading, 1000);

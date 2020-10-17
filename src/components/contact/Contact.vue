@@ -6,13 +6,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{info.subtitle}}
+                            {{ $prismic.richTextAsPlain(info.subtitle) }}
                         </span>
                         <h1 class="title title--section">
-                            {{info.title}}
+                            {{ $prismic.richTextAsPlain(info.title) }}
                         </h1>
                         <p class="text text--center text--mini">
-                            {{info.text}}
+                            <prismic-rich-text :field="info.text"/>
                         </p>
                     </div>
                     <div class="col-sm-12">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-sm-12">
                         <p class="text text--mini">
-                            {{info.text_after_form}}
+                            <prismic-rich-text :field="info.text_after_form"/>
                         </p>
                     </div>
                 </div>
@@ -217,10 +217,10 @@
                 self.$prismic.client.getSingle('contacts')
                     .then((document) => {
                         self.info = {
-                            title: document.data.title[0].text,
-                            subtitle: document.data.subtitle[0].text,
-                            text: document.data.text[0].text,
-                            text_after_form: document.data.text_after_form[0].text,
+                            title: document.data.title,
+                            subtitle: document.data.subtitle,
+                            text: document.data.text,
+                            text_after_form: document.data.text_after_form,
                             coordinate_map: document.data.coordinate_map,
                             links: document.data.links
                         },
