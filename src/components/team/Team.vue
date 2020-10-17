@@ -2,7 +2,7 @@
     <transition name="slide-fade">
         <div class="team">
             <Banner :banner="banner"/>
-            <section class="section">
+            <section class="section pb-0">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-sm-12 columns-2">
