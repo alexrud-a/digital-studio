@@ -119,6 +119,10 @@ $desktop: 1200px;
 
 /*---------BASE----------*/
 
+body {
+  overflow: hidden;
+}
+
 #app {
   font-family: $font;
   font-weight: 400;
