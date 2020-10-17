@@ -6,13 +6,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            WE LOVE TO HEAR FROM YOU!
+                            {{ $prismic.richTextAsPlain(info.subtitle) }}
                         </span>
                         <h1 class="title title--section">
-                            WHAT CAN WE DO FOR YOU?
+                            {{ $prismic.richTextAsPlain(info.title) }}
                         </h1>
                         <p class="text text--center text--mini">
-                            We are already excited, but things are getting even more exciting. Just fill out the form, ideally with your name, e-mail address and message. Click on “send” and we will get back to you with extraordinary ideas and projects. See you soon!
+                            <prismic-rich-text :field="info.text"/>
                         </p>
                     </div>
                     <div class="col-sm-12">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-sm-12">
                         <p class="text text--mini">
-                            After submitting the contact form, the personal data enterd by you, will be processed by elements.at New Media Solutions GmbH, Söllheimer Straße 16, 5020 Salzburg, info@elements.at responsible for data protection and for the purpose of processing your request on the basis of your consent given by submitting the form. There is no legal or contractual obligation to provide personal information. The non-provision of such information means that you do not submit your request and therefore, that we can not process it. You have the right to revoke your consent at any time by written notice without affecting the legality of the processing carried out on the basis of the consent given until the revocation.
+                            <prismic-rich-text :field="info.text_after_form"/>
                         </p>
                     </div>
                 </div>
@@ -77,22 +77,10 @@
                                 <p>
                                     Вы можете связаться с нами любым удобным способом
                                 </p>
-                                <div class="contact__info-item">
-                                    <span>Телефон: </span>
-                                    <a href="#" class="link">
-                                        8 (999) 999-99-99
-                                    </a>
-                                </div>
-                                <div class="contact__info-item">
-                                    <span>Телефон: </span>
-                                    <a href="#" class="link">
-                                        8 (999) 999-99-99
-                                    </a>
-                                </div>
-                                <div class="contact__info-item">
-                                    <span>Email: </span>
-                                    <a href="#" class="link">
-                                        test@test.ru
+                                <div class="contact__info-item" v-for="(link, index) in info.links" :key="index">
+                                    <span>{{link.type[0].text}}: </span>
+                                    <a :href="link.link[0].text+':'+link.text[0].text" class="link">
+                                        {{link.text[0].text}}
                                     </a>
                                 </div>
                             </div>
@@ -124,6 +112,14 @@
                 email: '',
                 text: '',
                 message: '',
+                info: {
+                    title: '',
+                    subtitle: '',
+                    text: '',
+                    text_after_form: '',
+                    coordinate_map: '',
+                    links: [],
+                },
             }
         },
         metaInfo: {
@@ -136,6 +132,7 @@
             Preloader
         },
         async mounted() {
+            let self = this;
             const settings = {
                 apiKey: 'f252d86c-c0f0-4472-af94-a3f815c7fb37',
                 lang: 'ru_RU',
@@ -149,12 +146,12 @@
 
             function init() {
                 let myMap = new ymaps.Map("map", {
-                    center: [55.76, 37.64],
+                    center: [self.info.coordinate_map.latitude, self.info.coordinate_map.longitude],
                     zoom: 15,
                     controls: []
                 });
 
-                let myPlacemark = new ymaps.Placemark([55.76, 37.64], {
+                let myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
                         balloonContent: 'г. Москва'
                     },
                     {
@@ -215,9 +212,24 @@
                         }
                     });
             },
+            getContent () {
+                let self = this;
+                self.$prismic.client.getSingle('contacts')
+                    .then((document) => {
+                        self.info = {
+                            title: document.data.title,
+                            subtitle: document.data.subtitle,
+                            text: document.data.text,
+                            text_after_form: document.data.text_after_form,
+                            coordinate_map: document.data.coordinate_map,
+                            links: document.data.links
+                        },
+                        setTimeout(this.loading, 1000);
+                    })
+            },
         },
         created() {
-            setTimeout(this.loading, 1000);
+            this.getContent();
         }
     }
 </script>

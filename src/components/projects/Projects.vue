@@ -8,10 +8,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{section.subtitle}}
+                            {{ $prismic.richTextAsPlain(section.subtitle) }}
                         </span>
                         <h2 class="title title--section">
-                            {{section.title}}
+                            {{ $prismic.richTextAsPlain(section.title) }}
                         </h2>
                     </div>
                     <div class="col-sm-12">
@@ -42,7 +42,7 @@
                             >
                                 <img :src="project.data.img_project.url">
                                 <div class="projects__title">
-                                    {{project.data.title[0].text}}
+                                    {{ $prismic.richTextAsPlain(project.data.title) }}
                                 </div>
                             </a>
                         </div>
@@ -108,11 +108,11 @@
                 let self = this;
                 self.$prismic.client.getSingle('projects')
                     .then((document) => {
-                        self.banner.title = document.data.title[0].text;
-                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.title = document.data.title;
+                        self.banner.subtitle = document.data.subtitle;
                         self.banner.bgImg = document.data.bgImg.url;
-                        self.section.title = document.data.section[0].title[0].text;
-                        self.section.subtitle = document.data.section[0].subtitle[0].text;
+                        self.section.title = document.data.section[0].title;
+                        self.section.subtitle = document.data.section[0].subtitle;
                         setTimeout(this.loading, 1000);
                     })
             },

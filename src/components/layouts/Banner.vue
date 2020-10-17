@@ -28,10 +28,10 @@
             <div class="row">
                 <div class="col-sm-12">
                     <span class="subtitle banner__subtitle">
-                        {{banner.subtitle}}
+                        {{ $prismic.richTextAsPlain(banner.subtitle) }}
                     </span>
                     <h1 class="title banner__title">
-                        {{banner.title}}
+                        {{ $prismic.richTextAsPlain(banner.title) }}
                     </h1>
                     <router-link
                             v-if="isHome"

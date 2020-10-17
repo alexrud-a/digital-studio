@@ -7,13 +7,13 @@
                 <div class="row align-items-center">
                     <div class="col-sm-12">
                         <span class="subtitle subtitle--left">
-                            {{section1.subtitle}}
+                            {{ $prismic.richTextAsPlain(section1.subtitle) }}
                         </span>
                         <h2 class="title title--section title--left title--mini">
-                            {{section1.title}}
+                            {{ $prismic.richTextAsPlain(section1.title) }}
                         </h2>
                         <p class="text text--mini columns-2">
-                            {{section1.text}}
+                            <prismic-rich-text :field="section1.text"/>
                         </p>
                     </div>
                 </div>
@@ -24,13 +24,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{section2.subtitle}}
+                            {{ $prismic.richTextAsPlain(section2.subtitle) }}
                         </span>
                         <h2 class="title title--section">
-                            {{section2.title}}
+                            {{ $prismic.richTextAsPlain(section2.subtitle) }}
                         </h2>
                         <p class="text text--center">
-                            {{section2.text}}
+                            <prismic-rich-text :field="section2.text"/>
                         </p>
                     </div>
                 </div>
@@ -46,10 +46,10 @@
                                 <use :href="'img/icons.svg#icon'+index"></use>
                             </svg>
                             <h4 class="icons__title">
-                                {{icon.title[0].text}}
+                                {{ $prismic.richTextAsPlain(icon.title) }}
                             </h4>
                             <span class="icons__text">
-                                {{icon.text[0].text}}
+                                {{ $prismic.richTextAsPlain(icon.text) }}
                             </span>
                         </router-link>
                     </div>
@@ -110,18 +110,18 @@
                 let self = this;
                 self.$prismic.client.getSingle('solutions')
                     .then((document) => {
-                        self.banner.title = document.data.title[0].text;
-                        self.banner.subtitle = document.data.subtitle[0].text;
+                        self.banner.title = document.data.title;
+                        self.banner.subtitle = document.data.subtitle;
                         self.banner.bgImg = document.data.bgImg.url;
                         self.section1 = {
-                            title: document.data.section[0].title[0].text,
-                            subtitle: document.data.section[0].subtitle[0].text,
-                            text: document.data.section[0].text[0].text
+                            title: document.data.section[0].title,
+                            subtitle: document.data.section[0].subtitle,
+                            text: document.data.section[0].text
                         };
                         self.section2 = {
-                            title: document.data.section[1].title[0].text,
-                            subtitle: document.data.section[1].subtitle[0].text,
-                            text: document.data.section[1].text[0].text
+                            title: document.data.section[1].title,
+                            subtitle: document.data.section[1].subtitle,
+                            text: document.data.section[1].text
                         };
                         setTimeout(this.loading, 1000);
                     });
