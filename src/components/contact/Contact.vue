@@ -11,9 +11,7 @@
                         <h1 class="title title--section">
                             {{ $prismic.richTextAsPlain(info.title) }}
                         </h1>
-                        <p class="text text--center text--mini">
-                            <prismic-rich-text :field="info.text"/>
-                        </p>
+                        <prismic-rich-text :field="info.text" class="text text--center text--mini"/>
                     </div>
                     <div class="col-sm-12">
                         <form class="contact__form" method="post" action="mail.php" @submit.prevent="submit">
@@ -55,9 +53,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12">
-                        <p class="text text--mini">
-                            <prismic-rich-text :field="info.text_after_form"/>
-                        </p>
+                        <prismic-rich-text :field="info.text_after_form" class="text text--mini"/>
                     </div>
                 </div>
             </div>

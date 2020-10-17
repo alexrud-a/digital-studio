@@ -12,9 +12,7 @@
                         <h2 class="title title--section title--left title--mini">
                             {{ $prismic.richTextAsPlain(section1.title) }}
                         </h2>
-                        <p class="text text--mini columns-2">
-                            <prismic-rich-text :field="section1.text"/>
-                        </p>
+                        <prismic-rich-text :field="section1.text" class="text text--mini columns-2"/>
                     </div>
                 </div>
             </div>
@@ -29,9 +27,7 @@
                         <h2 class="title title--section">
                             {{ $prismic.richTextAsPlain(section2.title) }}
                         </h2>
-                        <p class="text text--center">
-                            <prismic-rich-text :field="section2.text"/>
-                        </p>
+                        <prismic-rich-text :field="section2.text" class="text text--center"/>
                     </div>
                 </div>
             </div>
