@@ -245,7 +245,9 @@
                 img {
                     width: 100%;
                     height: 100%;
+                    max-height: 900px;
                     object-fit: cover;
+                    object-position: center top;
                 }
 
                 .agile__actions {
