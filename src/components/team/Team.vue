@@ -150,7 +150,7 @@
                     })
             },
             slideGo(index) {
-                this.$refs.main.goToNext(index);
+                this.$refs.main.goTo(index);
             },
             showCurrentSlide (event) {
                 this.activeSlide = event.nextSlide;
