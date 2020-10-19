@@ -34,7 +34,6 @@
                         {{ $prismic.richTextAsPlain(banner.title) }}
                     </h1>
                     <router-link
-                            v-if="isHome"
                             class="btn btn--banner btn-lg mt-5"
                             :to="{name: 'Contact'}">
                         Бесплатная консультация
@@ -82,7 +81,7 @@
         padding: 15px;
 
         @media screen and (min-width: $tablet) {
-            height: 40vh;
+            height: 60vh;
         }
 
         &::before {
