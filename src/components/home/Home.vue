@@ -76,7 +76,7 @@
                         <h2 class="title title--section">
                             {{ $prismic.richTextAsPlain(section3.title) }}
                         </h2>
-                        <prismic-rich-text :field="section3.text" class="text text--mini text--center"/>
+                        <prismic-rich-text :field="section3.text" class="text text--center"/>
                     </div>
                 </div>
             </div>
