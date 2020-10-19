@@ -6,13 +6,13 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-sm-12 columns-2">
-                            <span class="subtitle subtitle--left">
+                            <span class="subtitle">
                                 {{ $prismic.richTextAsPlain(section.subtitle) }}
                             </span>
-                            <h2 class="title title--section title--left title--mini">
+                            <h2 class="title title--section">
                                 {{ $prismic.richTextAsPlain(section.title) }}
                             </h2>
-                            <prismic-rich-text :field="section.text" class="text text--mini"/>
+                            <prismic-rich-text :field="section.text" class="text text--center"/>
                         </div>
                     </div>
                 </div>
