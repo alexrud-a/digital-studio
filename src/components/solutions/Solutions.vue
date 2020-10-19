@@ -27,7 +27,7 @@
                             {{ $prismic.richTextAsPlain(section2.subtitle) }}
                         </span>
                         <h2 class="title title--section">
-                            {{ $prismic.richTextAsPlain(section2.subtitle) }}
+                            {{ $prismic.richTextAsPlain(section2.title) }}
                         </h2>
                         <prismic-rich-text :field="section2.text" class="text text--center"/>
                     </div>
