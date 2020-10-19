@@ -43,6 +43,48 @@
                                     Услуги
                                 </router-link>
                             </span>
+                            <ul class="header__submenu">
+                                <li>
+                                    <span @click="toggleMenu">
+                                        <router-link
+                                                class="header__menu-link header__submenu-link"
+                                                :to="{name: 'Solution', params: { name: 'design' }}"
+                                        >
+                                            Разработка дизайна
+                                        </router-link>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span @click="toggleMenu">
+                                        <router-link
+                                                class="header__menu-link header__submenu-link"
+                                                :to="{name: 'Solution', params: { name: 'programming' }}"
+                                        >
+                                            Программирование
+                                        </router-link>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span @click="toggleMenu">
+                                        <router-link
+                                                class="header__menu-link header__submenu-link"
+                                                :to="{name: 'Solution', params: { name: 'marketing' }}"
+                                        >
+                                            Реклама
+                                        </router-link>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span @click="toggleMenu">
+                                        <router-link
+                                                class="header__menu-link header__submenu-link"
+                                                :to="{name: 'Solution', params: { name: 'support' }}"
+                                        >
+                                            Сопровождение
+                                        </router-link>
+                                    </span>
+                                </li>
+                            </ul>
                         </li>
                         <li class="header__menu-item">
                             <span @click="toggleMenu">
@@ -213,6 +255,18 @@
                 font-weight: 700!important;
                 color: $base-color!important;
                 text-transform: uppercase;
+
+                &.active {
+                    color: $accent-color!important;
+                }
+            }
+        }
+
+        &__submenu {
+            list-style: none;
+
+            &-link {
+                font-weight: 500!important;
             }
         }
     }
