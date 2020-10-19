@@ -2,22 +2,20 @@
     <transition name="slide-fade">
         <div class="team">
             <Banner :banner="banner"/>
-            <section class="section pb-0">
+            <section class="section section--gray pb-0">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-sm-12">
-                            <span class="subtitle">
+                        <div class="col-sm-12 columns-2">
+                            <span class="subtitle subtitle--left">
                                 {{ $prismic.richTextAsPlain(section.subtitle) }}
                             </span>
-                            <h2 class="title title--section">
+                            <h2 class="title title--section title--left">
                                 {{ $prismic.richTextAsPlain(section.title) }}
                             </h2>
-                            <prismic-rich-text :field="section.text" class="text text--center"/>
+                            <prismic-rich-text :field="section.text" class="text text--mini"/>
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="section">
                 <div class="container-fluid p-0">
                     <div class="icons icons--no-hover">
                         <div v-for="(icon, index) in icons" :key="index" class="icons__item">
