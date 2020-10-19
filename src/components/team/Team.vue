@@ -32,39 +32,35 @@
                     </div>
                 </div>
             </section>
-            <section class="team__slider">
+            <section class="team__slider" v-if="slider.length > 0">
                 <div class="container-fluid">
                     <div class="row d-flex align-items-center flex-wrap-reverse">
                         <div class="col-lg-6 col-md-12">
-                            <template v-if="slider.length > 0">
-                                <VueAgile ref="main" :as-nav-for="[$refs.thumbnails]" :options="sliderOpt" class="team__slider-one" @before-change="showCurrentSlide($event)">
-                                    <div v-for="(slide, index) in slider" :key="index">
-                                        <span class="subtitle">
-                                            {{ $prismic.richTextAsPlain(slide.subtitle) }}
-                                        </span>
-                                        <h2 class="title">
-                                            {{ $prismic.richTextAsPlain(slide.title) }}
-                                        </h2>
-                                        <prismic-rich-text :field="slide.text" class="text text--center"/>
-                                    </div>
-                                </VueAgile>
-                                <div class="container">
-                                    <div class="team__slider-dots">
-                                        <span class="team__slider-dot" v-for="(dot, index) in slider" :key="index" @click="slideGo(index)" :class="{'team__slider-dot--active' : index === activeSlide }">
-                                            {{ $prismic.richTextAsPlain(dot.nameSlide) }}
-                                        </span>
-                                    </div>
+                            <VueAgile ref="main" :as-nav-for="[$refs.thumbnails]" :options="sliderOpt" class="team__slider-one" @before-change="showCurrentSlide($event)">
+                                <div v-for="(slide, index) in slider" :key="index">
+                                    <span class="subtitle">
+                                        {{ $prismic.richTextAsPlain(slide.subtitle) }}
+                                    </span>
+                                    <h2 class="title">
+                                        {{ $prismic.richTextAsPlain(slide.title) }}
+                                    </h2>
+                                    <prismic-rich-text :field="slide.text" class="text text--center"/>
                                 </div>
-                            </template>
+                            </VueAgile>
+                            <div class="container">
+                                <div class="team__slider-dots">
+                                    <span class="team__slider-dot" v-for="(dot, index) in slider" :key="index" @click="slideGo(index)" :class="{'team__slider-dot--active' : index === activeSlide }">
+                                        {{ $prismic.richTextAsPlain(dot.nameSlide) }}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-6 col-md-12 p-0">
-                            <template v-if="slider.length > 0">
-                                <VueAgile ref="thumbnails" :as-nav-for="[$refs.main]" :options="sliderOpt" class="team__slider-two">
-                                    <div v-for="(slideThumb, index) in slider" :key="index">
-                                        <img :src="slideThumb.img.url">
-                                    </div>
-                                </VueAgile>
-                            </template>
+                            <VueAgile ref="thumbnails" :as-nav-for="[$refs.main]" :options="sliderOpt" class="team__slider-two">
+                                <div v-for="(slideThumb, index) in slider" :key="index">
+                                    <img :src="slideThumb.img.url">
+                                </div>
+                            </VueAgile>
                         </div>
                     </div>
                 </div>

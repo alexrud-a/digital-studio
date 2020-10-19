@@ -106,7 +106,7 @@
         },
         created() {
             this.getContent();
-        }
+        },
     }
 </script>
 

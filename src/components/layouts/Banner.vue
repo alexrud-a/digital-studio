@@ -71,7 +71,7 @@
 
 <style lang="scss">
     .banner {
-        height: 60vh;
+        height: 65vh;
         display: flex;
         justify-content: center;
         align-items: center;
