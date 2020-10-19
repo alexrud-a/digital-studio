@@ -1,8 +1,12 @@
 <svg>
     <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 768" id="icon1">
-        <path fill="none" stroke="#F30" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M220.6 598.4l-12.8 80c0 6.4 6.4 9.6 12.8 9.6h195.2c6.4 0 12.8-6.4 12.8-9.6l-12.8-80m208-406.4v-70.4c0-22.4-19.2-41.6-41.6-41.6H57.4C35 80 15.8 99.2 15.8 121.6v361.6c0 22.4 19.2 41.6 41.6 41.6h390.4m-432-73.6h432"></path>
-        <path fill="none" stroke="#F30" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" d="M713.4 240h-176c-22.4 0-38.4 16-38.4 38.4v371.2c0 22.4 16 38.4 38.4 38.4h172.8c22.4 0 41.6-16 41.6-38.4V278.4c3.2-19.2-16-38.4-38.4-38.4zM627 640h0z"></path>
-        <path fill="none" stroke="#F30" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" d="M499 297.6h252.8v291.2H499V297.6z"></path>
+        <g>
+            <path fill="none" stroke="#FF3300" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" d="M480,557.4H288v160h41.6   l32,32h48l32-32H480V557.4z" style="stroke-width: 32px; stroke-dashoffset: 1e-05; stroke-dasharray: none;"></path>
+            <path fill="none" stroke="#FF3300" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" d="M601.6,231   c0-118.4-99.2-214.4-217.6-214.4c-121.6,0-217.6,96-217.6,214.4c0,64,28.8,134.4,73.6,185.6l0,0c0,0,64,83.2,64,140.8h163.2l0,0   l0,0c0-57.6,64-140.8,64-140.8C576,365.4,601.6,295,601.6,231z" style="stroke-width: 32px; stroke-dashoffset: 1e-05; stroke-dasharray: none;"></path>
+            <path fill="none" stroke="#FF3300" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" d="M384,557.4V338.8" style="stroke-width: 32px; stroke-dashoffset: 1e-05; stroke-dasharray: none;"></path>
+            <path fill="none" stroke="#FF3300" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" d="M295.5,263.1   c15.3-14.7,45.6-8,67.6,14.9c22.1,22.9,27.5,53.4,12.2,68.1s-45.6,8-67.6-14.9C285.7,308.3,280.2,277.8,295.5,263.1z" style="stroke-width: 32px; stroke-dashoffset: 1e-05; stroke-dasharray: none;"></path>
+            <path fill="none" stroke="#FF3300" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" d="M404.9,278.4   c22.1-22.9,52.3-29.6,67.6-14.9s9.8,45.2-12.2,68.1c-22.1,22.9-52.3,29.6-67.6,14.9S382.9,301.3,404.9,278.4z" style="stroke-width: 32px; stroke-dashoffset: 1e-05; stroke-dasharray: none;"></path>
+        </g>
     </symbol>
     <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 768" id="icon2">
         <g fill="none" stroke="#F30" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
