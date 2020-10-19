@@ -50,7 +50,7 @@
                                                 class="header__menu-link header__submenu-link"
                                                 :to="{name: 'Solution', params: { name: 'design' }}"
                                         >
-                                            Разработка дизайна
+                                            Дизайн
                                         </router-link>
                                     </span>
                                 </li>
@@ -70,7 +70,7 @@
                                                 class="header__menu-link header__submenu-link"
                                                 :to="{name: 'Solution', params: { name: 'marketing' }}"
                                         >
-                                            Реклама
+                                            Маркетинг и реклама
                                         </router-link>
                                     </span>
                                 </li>
