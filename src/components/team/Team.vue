@@ -5,7 +5,7 @@
             <section class="section pb-0">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-sm-12 columns-2">
+                        <div class="col-sm-12">
                             <span class="subtitle">
                                 {{ $prismic.richTextAsPlain(section.subtitle) }}
                             </span>
