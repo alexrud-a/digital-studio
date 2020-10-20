@@ -58,12 +58,6 @@
                 default() {
                     return {}
                 }
-            },
-            isHome: {
-                type: Boolean,
-                default() {
-                    return false
-                }
             }
         },
     }

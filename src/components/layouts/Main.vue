@@ -1,14 +1,24 @@
 <template>
     <div class="main">
         <keep-alive :exclude="'Solution'">
-            <router-view></router-view>
+            <router-view :key="key"></router-view>
         </keep-alive>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Main"
+        name: "Main",
+        data(){
+            return {
+                key: null,
+            }
+        },
+        watch: {
+            $route(to) {
+                this.key = to.path;
+            }
+        },
     }
 </script>
 
