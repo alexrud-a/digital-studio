@@ -79,7 +79,7 @@
                     { name: 'description', content: this.metaDescription },
                     {property: 'og:title', content: 'Digital Elements - ' + this.metaTitle},
                     {property: 'og:type', content: 'article'},
-                    {property: 'og:url', content: window.location.hostname + this.$route.fullPath },
+                    {property: 'og:url', content: window.location.href },
                     {property: 'og:description', content: this.metaDescription },
                     {property: 'og:image', content: this.banner.bgImg },
                     {property: 'og:site_name', content: 'Digital Elements'}
