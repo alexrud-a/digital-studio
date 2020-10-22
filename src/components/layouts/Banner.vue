@@ -34,7 +34,7 @@
                         {{ $prismic.richTextAsPlain(banner.title) }}
                     </h1>
                     <router-link
-                            class="btn btn--banner btn-lg mt-5"
+                            class="btn btn--banner btn-lg mt-5 mb-5"
                             :to="{name: 'Contact'}">
                         Бесплатная консультация
                     </router-link>
@@ -58,12 +58,6 @@
                 default() {
                     return {}
                 }
-            },
-            isHome: {
-                type: Boolean,
-                default() {
-                    return false
-                }
             }
         },
     }
@@ -71,7 +65,7 @@
 
 <style lang="scss">
     .banner {
-        height: 60vh;
+        min-height: 65vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -81,7 +75,7 @@
         padding: 15px;
 
         @media screen and (min-width: $tablet) {
-            height: 60vh;
+            min-height: 60vh;
         }
 
         &::before {

@@ -82,10 +82,13 @@
             </div>
             <div class="container p-0">
                 <div class="clients">
-                    <div class="clients__item" v-for="(item, index) in clients" :key="index">
+                    <div class="clients__item" v-for="(cat, index) in categories" :key="index">
                         <svg>
-                            <use :href="'/img/clients.svg#logo'+index"></use>
+                            <use :href="'/img/clients.svg#'+cat.icon[0].text"></use>
                         </svg>
+                        <span>
+                            {{cat.cat[0].text}}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -130,7 +133,7 @@
                     text: ''
                 },
                 icons: {},
-                clients: 24,
+                categories: {},
             };
         },
         metaInfo: {
@@ -174,6 +177,7 @@
                             text: document.data.section[2].text
                         }
                         self.icons = document.data.icons;
+                        self.categories = document.data.categories;
                         setTimeout(this.loading, 1000);
                     })
                 },
@@ -354,6 +358,7 @@
             border-bottom: 1px solid #c8c8c8;
             transition: all .3s linear;
             max-height: 125px;
+            text-align: center;
 
             &:nth-of-type(3n) {
                 border-right: none;
@@ -364,7 +369,7 @@
             }
 
             @media screen  and (min-width: $tablet) {
-                max-height: 145px;
+                max-height: 165px;
                 padding: 20px;
             }
             @media screen and (min-width: $desktop) {
@@ -387,9 +392,27 @@
                 }
             }
 
+            span {
+                display: block;
+                font-weight: 700;
+                font-size: 12px;
+
+                @media screen  and (min-width: $tablet) {
+                    font-size: 14px;
+                }
+            }
+
             svg {
-                width: 100%;
-                height: 100%;
+                width: 60px;
+                height: 60px;
+                max-width: 100%;
+                max-height: 100%;
+                margin-bottom: 10px;
+
+                @media screen  and (min-width: $tablet) {
+                    width: 80px;
+                    height: 80px;
+                }
             }
 
             &:hover {
@@ -397,6 +420,10 @@
 
                 svg {
                     fill: #fff;
+                }
+
+                span {
+                    color: #fff;
                 }
             }
         }
