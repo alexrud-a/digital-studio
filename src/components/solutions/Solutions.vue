@@ -91,13 +91,22 @@
                     text: ''
                 },
                 icons: {},
+                metaDescription: '',
             };
         },
-        metaInfo: {
-            title: 'Digital Elements - Услуги',
-            meta: [
-                { name: 'description', content: 'Digital studio' }
-            ],
+        metaInfo() {
+            return {
+                title: 'Digital Elements - Услуги',
+                meta: [
+                    { name: 'description', content: this.metaDescription },
+                    {property: 'og:title', content: 'Digital Elements - Услуги'},
+                    {property: 'og:type', content: 'article'},
+                    {property: 'og:url', content: window.location.hostname + this.$route.fullPath },
+                    {property: 'og:description', content: this.metaDescription },
+                    {property: 'og:image', content: this.banner.bgImg },
+                    {property: 'og:site_name', content: 'Digital Elements'}
+                ],
+            }
         },
         methods: {
             loading: function () {
@@ -108,6 +117,7 @@
                 let self = this;
                 self.$prismic.client.getSingle('solutions')
                     .then((document) => {
+                        self.metaDescription = document.data.section[0].text[0].text;
                         self.banner.title = document.data.title;
                         self.banner.subtitle = document.data.subtitle;
                         self.banner.bgImg = document.data.bgImg.url;
