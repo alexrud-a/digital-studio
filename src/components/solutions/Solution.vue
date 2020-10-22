@@ -68,13 +68,23 @@
                     title: '',
                     text: ''
                 },
+                metaTitle: '',
+                metaDescription: '',
             };
         },
-        metaInfo: {
-            title: 'Digital studio - Solution',
-            meta: [
-                { name: 'description', content: 'Digital studio' }
-            ],
+        metaInfo() {
+            return {
+                title: 'Digital Elements - ' + this.metaTitle,
+                meta: [
+                    { name: 'description', content: this.metaDescription },
+                    {property: 'og:title', content: 'Digital Elements - ' + this.metaTitle},
+                    {property: 'og:type', content: 'article'},
+                    {property: 'og:url', content: window.location.href },
+                    {property: 'og:description', content: this.metaDescription },
+                    {property: 'og:image', content: this.banner.bgImg },
+                    {property: 'og:site_name', content: 'Digital Elements'}
+                ],
+            }
         },
         methods: {
             loading: function () {
@@ -87,6 +97,8 @@
                     self.$prismic.Predicates.at('document.tags', [self.$route.params.name])
                 )
                     .then((response) => {
+                        self.metaTitle = response.results[0].data.title[0].text;
+                        self.metaDescription = response.results[0].data.section[0].text[0].text;
                         self.banner.title = response.results[0].data.title;
                         self.banner.subtitle = response.results[0].data.subtitle;
                         self.banner.bgImg = response.results[0].data.bgImg.url;

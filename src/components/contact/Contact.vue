@@ -121,7 +121,7 @@
         metaInfo: {
             title: 'Digital Elements - Контакты',
             meta: [
-                { name: 'description', content: 'Digital studio' }
+                { name: 'description', content: 'Digital Elements' }
             ],
         },
         components: {

@@ -136,11 +136,19 @@
                 categories: {},
             };
         },
-        metaInfo: {
-            title: 'Digital Elements - Разработка и продвижение сайтов',
-            meta: [
-                { name: 'description', content: 'Разработка сайтов под ключ, сопровождение и поддержка сайтов. Продвижение и реклама' }
-            ],
+        metaInfo() {
+            return {
+                title: 'Digital Elements - Разработка и продвижение сайтов',
+                meta: [
+                    { name: 'description', content: 'Разработка сайтов под ключ, сопровождение и поддержка сайтов. Продвижение и реклама' },
+                    {property: 'og:title', content: 'Digital Elements - Разработка и продвижение сайтов'},
+                    {property: 'og:type', content: 'website'},
+                    {property: 'og:url', content: window.location.href },
+                    {property: 'og:description', content: 'Разработка сайтов под ключ, сопровождение и поддержка сайтов. Продвижение и реклама' },
+                    {property: 'og:image', content: this.banner.bgImg },
+                    {property: 'og:site_name', content: 'Digital Elements'}
+                ],
+            }
         },
         components: {
             Preloader,
