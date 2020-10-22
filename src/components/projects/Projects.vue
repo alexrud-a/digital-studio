@@ -81,7 +81,7 @@
             };
         },
         metaInfo: {
-            title: 'Digital studio - Projects',
+            title: 'Digital Elements - Портфолио',
             meta: [
                 { name: 'description', content: 'Digital studio' }
             ],
