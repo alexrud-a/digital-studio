@@ -137,9 +137,9 @@
             };
         },
         metaInfo: {
-            title: 'Digital studio - Home',
+            title: 'Digital Elements - Разработка и продвижение сайтов',
             meta: [
-                { name: 'description', content: 'Digital studio' }
+                { name: 'description', content: 'Разработка сайтов под ключ, сопровождение и поддержка сайтов. Продвижение и реклама' }
             ],
         },
         components: {

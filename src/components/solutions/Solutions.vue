@@ -94,7 +94,7 @@
             };
         },
         metaInfo: {
-            title: 'Digital studio - Solutions',
+            title: 'Digital Elements - Услуги',
             meta: [
                 { name: 'description', content: 'Digital studio' }
             ],

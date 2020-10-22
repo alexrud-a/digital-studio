@@ -116,7 +116,7 @@
             };
         },
         metaInfo: {
-            title: 'Digital studio - Team',
+            title: 'Digital Elements - Команда',
             meta: [
                 { name: 'description', content: 'Digital studio' }
             ],
