@@ -68,13 +68,16 @@
                     title: '',
                     text: ''
                 },
+                metaTitle: '',
             };
         },
-        metaInfo: {
-            title: 'Digital studio - Solution',
-            meta: [
-                { name: 'description', content: 'Digital studio' }
-            ],
+        metaInfo() {
+            return {
+                title: 'Digital Elements - ' + this.metaTitle,
+                meta: [
+                    { name: 'description', content: 'Digital Elements' }
+                ],
+            }
         },
         methods: {
             loading: function () {
@@ -87,6 +90,7 @@
                     self.$prismic.Predicates.at('document.tags', [self.$route.params.name])
                 )
                     .then((response) => {
+                        self.metaTitle = response.results[0].data.title[0].text;
                         self.banner.title = response.results[0].data.title;
                         self.banner.subtitle = response.results[0].data.subtitle;
                         self.banner.bgImg = response.results[0].data.bgImg.url;
