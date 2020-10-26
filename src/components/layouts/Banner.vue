@@ -1,37 +1,37 @@
 <template>
     <section class="banner">
         <video
-                v-if="banner.bgVideo1"
+                v-if="banner.video"
                 class="banner__video"
                 autoplay=""
                 preload="metadata"
                 loop=""
                 muted=""
                 playsinline=""
-                :poster="banner.bgImg"
+                :poster="banner.background"
         >
             <source
-                    :src="banner.bgVideo1"
+                    :src="banner.video"
                     type="video/mp4"
             >
             <source
-                    :src="banner.bgVideo2"
+                    :src="banner.videoWebm"
                     type="video/webm"
             >
         </video>
         <div v-else class="banner__video">
             <img
-                    :src="banner.bgImg"
+                    :src="banner.background"
             >
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <span class="subtitle banner__subtitle">
-                        {{ $prismic.richTextAsPlain(banner.subtitle) }}
+                        {{ banner.subtitle }}
                     </span>
                     <h1 class="title banner__title">
-                        {{ $prismic.richTextAsPlain(banner.title) }}
+                        {{ banner.title }}
                     </h1>
                     <router-link
                             class="btn btn--banner btn-lg mt-5 mb-5"

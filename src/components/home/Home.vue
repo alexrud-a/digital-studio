@@ -1,98 +1,104 @@
 <template>
     <transition name="slide-fade">
         <div class="home">
-        <Banner :banner="banner" :isHome="isHome"/>
-        <section class="section section--gray pb-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
+        <Banner :banner="content.banner"/>
+            <section class="section"
+                     v-for="(section, i) in content.section"
+                     :key="i"
+                     :class="{'section--gray pb-0' : (i === 0)}"
+            >
+                <div class="container" v-if="i === 0">
+                    <div class="row">
+                        <div class="col-sm-12">
                         <span class="subtitle">
-                            {{ $prismic.richTextAsPlain(section1.subtitle) }}
+                            {{ section.subtitle }}
                         </span>
-                        <h2 class="title title--section">
-                            {{ $prismic.richTextAsPlain(section1.title) }}
-                        </h2>
-                        <prismic-rich-text :field="section1.text" class="text text--center"/>
+                            <h2 class="title title--section">
+                                {{ section.title }}
+                            </h2>
+                            <div class="text text--center"
+                                 v-html="section.text">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="container-fluid p-0">
-                <div class="icons">
-                    <div v-for="(icon, index) in icons" :key="index" class="icons__item">
-                        <router-link
-                                :to="{name: 'Solution', params: { name: icon.link.tags[0] }}"
-                                class="link"
-                        >
-                            <svg>
-                                <use :href="'img/icons.svg#icon'+index"></use>
-                            </svg>
-                            <h4 class="icons__title">
-                                {{ $prismic.richTextAsPlain(icon.title) }}
-                            </h4>
-                            <span class="icons__text">
-                                {{ $prismic.richTextAsPlain(icon.text) }}
-                            </span>
-                        </router-link>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-4 col-sm-12">
-                        <span class="subtitle subtitle--left">
-                            {{ $prismic.richTextAsPlain(section2.subtitle) }}
-                        </span>
-                        <h2 class="title title--section title--left title--mini">
-                            {{ $prismic.richTextAsPlain(section2.title) }}
-                        </h2>
-                    </div>
-                    <div class="col-md-8 col-sm-12">
-                        <prismic-rich-text :field="section2.text" class="text text--mini"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="mini-banner">
-                            <img src="/img/banner_bg.jpeg" class="mini-banner__img">
+                <div class="container-fluid p-0" v-if="i === 0">
+                    <div class="icons">
+                        <div v-for="(icon, index) in content.uslugi" :key="index" class="icons__item">
                             <router-link
-                                    class="mini-banner__link"
-                                    :to="{name: 'Solutions'}">
-                                Выбрать услугу
+                                    :to="{name: 'Solution', params: { name: icon.link.post_name }}"
+                                    class="link"
+                            >
+                                <svg>
+                                    <use :href="'img/icons.svg#icon'+index"></use>
+                                </svg>
+                                <h4 class="icons__title">
+                                    {{ icon.title }}
+                                </h4>
+                                <span class="icons__text">
+                                    {{ icon.desc }}
+                                </span>
                             </router-link>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="subtitle">
-                            {{ $prismic.richTextAsPlain(section3.subtitle) }}
+                <div class="container" v-if="i === 1">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 col-sm-12">
+                        <span class="subtitle subtitle--left">
+                            {{ section.subtitle }}
                         </span>
-                        <h2 class="title title--section">
-                            {{ $prismic.richTextAsPlain(section3.title) }}
-                        </h2>
-                        <prismic-rich-text :field="section3.text" class="text text--center"/>
+                            <h2 class="title title--section title--left title--mini">
+                                {{ section.title }}
+                            </h2>
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="text text--mini"
+                                 v-html="section.text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="mini-banner">
+                                <img src="/img/banner_bg.jpeg" class="mini-banner__img">
+                                <router-link
+                                        class="mini-banner__link"
+                                        :to="{name: 'Solutions'}">
+                                    Выбрать услугу
+                                </router-link>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="container p-0">
-                <div class="clients">
-                    <div class="clients__item" v-for="(cat, index) in categories" :key="index">
-                        <svg>
-                            <use :href="'/img/clients.svg#'+cat.icon[0].text"></use>
-                        </svg>
-                        <span>
-                            {{cat.cat[0].text}}
-                        </span>
+                <div class="container" v-if="i === 2">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class="subtitle">
+                            {{ section.subtitle }}
+                            </span>
+                            <h2 class="title title--section">
+                                {{ section.title }}
+                            </h2>
+                            <div class="text text--center"
+                                 v-html="section.text">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+                <div class="container p-0" v-if="i === 2">
+                    <div class="clients">
+                        <div class="clients__item" v-for="(cat, index) in content.categories" :key="index">
+                            <svg>
+                                <use :href="'/img/clients.svg#'+cat.icon"></use>
+                            </svg>
+                            <span>
+                                {{ cat.title }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
         <FooterTop/>
         <Preloader :isLoad="isLoad"/>
     </div>
@@ -104,36 +110,15 @@
     import FooterTop from "../layouts/FooterTop";
     import Preloader from "../layouts/Preloader";
 
+    import axios from 'axios'
+
     export default {
         name: "Home",
         data () {
             return {
-                isHome: true,
                 isLoad: false,
-                banner: {
-                    title: '',
-                    subtitle: '',
-                    bgImg: '',
-                    bgVideo1: '',
-                    bgVideo2: '',
-                },
-                section1: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                section2: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                section3: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                icons: {},
-                categories: {},
+                content: [],
+                sections: [],
             };
         },
         metaInfo() {
@@ -145,7 +130,7 @@
                     {property: 'og:type', content: 'website'},
                     {property: 'og:url', content: window.location.href },
                     {property: 'og:description', content: 'Разработка сайтов под ключ, сопровождение и поддержка сайтов. Продвижение и реклама' },
-                    {property: 'og:image', content: this.banner.bgImg },
+                    // {property: 'og:image', content: this.banner.background },
                     {property: 'og:site_name', content: 'Digital Elements'}
                 ],
             }
@@ -160,38 +145,23 @@
                 let self = this;
                 self.isLoad = true
             },
-            getContent () {
-                let self = this;
-                self.$prismic.client.getSingle('home')
-                    .then((document) => {
-                        self.banner.title = document.data.title;
-                        self.banner.subtitle = document.data.subtitle;
-                        self.banner.bgImg = document.data.bgImg.url;
-                        self.banner.bgVideo1 = document.data.bgVideo1.url;
-                        self.banner.bgVideo2 = document.data.bgVideo2.url;
-                        self.section1 = {
-                            title: document.data.section[0].title,
-                            subtitle: document.data.section[0].subtitle,
-                            text: document.data.section[0].text
-                        };
-                        self.section2 = {
-                            title: document.data.section[1].title,
-                            subtitle: document.data.section[1].subtitle,
-                            text: document.data.section[1].text
-                        };
-                        self.section3 = {
-                            title: document.data.section[2].title,
-                            subtitle: document.data.section[2].subtitle,
-                            text: document.data.section[2].text
-                        }
-                        self.icons = document.data.icons;
-                        self.categories = document.data.categories;
+            GetContent() {
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/9', {
+                    method: "GET"
+                })
+                    .then((response) => {
+                        this.content = response.data.acf;
+                        this.sections = response.data.acf.section;
                         setTimeout(this.loading, 1000);
                     })
-                },
+                    .catch((error) => {
+                        console.log(error);
+                        return error;
+                    })
+            },
         },
         created () {
-            this.getContent();
+            this.GetContent();
         },
     }
 </script>
