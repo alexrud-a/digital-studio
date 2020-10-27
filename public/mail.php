@@ -20,7 +20,7 @@ $mail->SMTPSecure = 'ssl';
 $mail->Port = 465;
 
 $mail->setFrom('zayavka_sayt@mail.ru');
-$mail->addAddress('alexrud-a@yandex.ru');
+$mail->addAddress('aeeer889@yandex.ru');
 $mail->isHTML(false);
 
 $mail->Subject = 'Заявка с сайта';
