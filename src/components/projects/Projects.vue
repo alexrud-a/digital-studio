@@ -43,7 +43,12 @@
                                :href="project.acf.link"
                                target="_blank"
                             >
-                                <img :src="project.better_featured_image.source_url" :alt="project.better_featured_image.alt_text">
+                                <picture>
+                                    <source media="(min-width: 768px)" :srcset="project.better_featured_image.media_details.sizes.medium.source_url">
+                                    <img :src="project.better_featured_image.media_details.sizes.thumbnail.source_url"
+                                         :alt="project.better_featured_image.alt_text"
+                                    >
+                                </picture>
                                 <div class="projects__title">
                                     {{ project.title.rendered }}
                                 </div>
