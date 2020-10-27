@@ -2,16 +2,19 @@
     <transition name="slide-fade">
         <div class="projects">
         <Preloader :isLoad="isLoad"/>
-        <Banner :banner="banner"/>
-        <section class="section">
+        <Banner :banner="content.banner"/>
+        <section class="section"
+                 v-for="(section, i) in content.section"
+                 :key="i"
+        >
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{ $prismic.richTextAsPlain(section.subtitle) }}
+                            {{ section.subtitle }}
                         </span>
                         <h2 class="title title--section">
-                            {{ $prismic.richTextAsPlain(section.title) }}
+                            {{ section.title }}
                         </h2>
                     </div>
                     <div class="col-sm-12">
@@ -23,12 +26,12 @@
                                 Все
                             </div>
                             <div class="projects__filter-item"
-                                 :class="{'projects__filter-item--active': activeCat === cat }"
+                                 :class="{'projects__filter-item--active': activeCat === cat.id }"
                                  v-for="cat in categories"
-                                 :key="cat"
-                                 @click="sortByCat(cat)"
+                                 :key="cat.id"
+                                 @click="sortByCat(cat.id)"
                             >
-                                {{cat}}
+                                {{cat.name}}
                             </div>
                         </div>
                     </div>
@@ -37,12 +40,12 @@
                             <a v-for="project in filtered"
                                :key="project.id"
                                class="projects__item"
-                               :href="project.data.link.url"
-                               :target="project.data.link.target"
+                               :href="project.acf.link"
+                               target="_blank"
                             >
-                                <img :src="project.data.img_project.url">
+                                <img :src="project.better_featured_image.source_url" :alt="project.better_featured_image.alt_text">
                                 <div class="projects__title">
-                                    {{ $prismic.richTextAsPlain(project.data.title) }}
+                                    {{ project.title.rendered }}
                                 </div>
                             </a>
                         </div>
@@ -59,6 +62,7 @@
     import Banner from "../layouts/Banner";
     import FooterTop from "../layouts/FooterTop";
     import Preloader from "../layouts/Preloader";
+    import axios from "axios";
 
     export default {
         name: "Projects",
@@ -66,25 +70,19 @@
             return {
                 activeCat: 'all',
                 isLoad: false,
-                banner: {
-                    title: '',
-                    subtitle: '',
-                    bgImg: '',
-                },
-                section: {
-                    title: '',
-                    subtitle: '',
-                },
+                content: [],
                 projects: [],
                 categories: [],
                 filtered: [],
+                meta: [],
+                metaTitle: '',
             };
         },
-        metaInfo: {
-            title: 'Digital Elements - Портфолио',
-            meta: [
-                { name: 'description', content: 'Digital studio' }
-            ],
+        metaInfo() {
+            return {
+                title: this.metaTitle,
+                meta: this.meta,
+            }
         },
         methods: {
             loading: function () {
@@ -96,7 +94,7 @@
                 if (cat && cat != 'all') {
                     this.activeCat = cat;
                     this.filtered = this.projects.filter(function (item) {
-                        return item.data.category == cat;
+                        return item.categories[0] == cat;
                     });
                 }
                 else {
@@ -104,37 +102,48 @@
                     this.filtered = this.projects;
                 }
             },
-            getContent () {
-                let self = this;
-                self.$prismic.client.getSingle('projects')
-                    .then((document) => {
-                        self.banner.title = document.data.title;
-                        self.banner.subtitle = document.data.subtitle;
-                        self.banner.bgImg = document.data.bgImg.url;
-                        self.section.title = document.data.section[0].title;
-                        self.section.subtitle = document.data.section[0].subtitle;
+            getContent() {
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/25', {
+                    method: "GET"
+                })
+                    .then((response) => {
+                        this.content = response.data.acf;
+                        this.meta = response.data.yoast_meta;
+                        this.metaTitle = response.data.yoast_title;
                         setTimeout(this.loading, 1000);
                     })
+                    .catch((error) => {
+                        console.log(error);
+                        return error;
+                    })
             },
-            getProjects () {
+            getProjects() {
                 let self = this;
-                self.$prismic.client.query(
-                    self.$prismic.Predicates.at('document.type', 'project')
-                )
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/posts', {
+                    method: "GET",
+                    params: {
+                        'per_page': 12
+                    }
+                })
                     .then((response) => {
-                        self.projects = response.results;
-                        self.categories = response.results.map(function (item) {
-                            return item.data.category
-                        });
-                        self.categories = Array.from(new Set(self.categories));
+                        self.projects = response.data;
                         self.sortByCat();
-                        setTimeout(this.loading, 1000);
+                    });
+            },
+            getCategories() {
+                let self = this;
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/categories', {
+                    method: "GET"
+                })
+                    .then((response) => {
+                        self.categories = response.data;
                     });
             },
         },
         created () {
             this.getContent();
             this.getProjects();
+            this.getCategories()
         },
         components: {
             Banner,

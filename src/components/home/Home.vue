@@ -118,21 +118,14 @@
             return {
                 isLoad: false,
                 content: [],
-                sections: [],
+                meta: [],
+                metaTitle: ''
             };
         },
         metaInfo() {
             return {
-                title: 'Digital Elements - Разработка и продвижение сайтов',
-                meta: [
-                    { name: 'description', content: 'Разработка сайтов под ключ, сопровождение и поддержка сайтов. Продвижение и реклама' },
-                    {property: 'og:title', content: 'Digital Elements - Разработка и продвижение сайтов'},
-                    {property: 'og:type', content: 'website'},
-                    {property: 'og:url', content: window.location.href },
-                    {property: 'og:description', content: 'Разработка сайтов под ключ, сопровождение и поддержка сайтов. Продвижение и реклама' },
-                    // {property: 'og:image', content: this.banner.background },
-                    {property: 'og:site_name', content: 'Digital Elements'}
-                ],
+                title: this.metaTitle,
+                meta: this.meta,
             }
         },
         components: {
@@ -145,13 +138,14 @@
                 let self = this;
                 self.isLoad = true
             },
-            GetContent() {
+            getContent() {
                 return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/9', {
                     method: "GET"
                 })
                     .then((response) => {
                         this.content = response.data.acf;
-                        this.sections = response.data.acf.section;
+                        this.meta = response.data.yoast_meta;
+                        this.metaTitle = response.data.yoast_title;
                         setTimeout(this.loading, 1000);
                     })
                     .catch((error) => {
@@ -161,7 +155,7 @@
             },
         },
         created () {
-            this.GetContent();
+            this.getContent();
         },
     }
 </script>

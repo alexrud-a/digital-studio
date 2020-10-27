@@ -1,64 +1,71 @@
 <template>
     <transition name="slide-fade">
         <div class="team">
-            <Banner :banner="banner"/>
-            <section class="section section--gray pb-0">
+            <Banner :banner="content.banner"/>
+            <section v-for="(section, i) in content.section"
+                     :key="i"
+                    class="section section--gray pb-0"
+            >
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-sm-12 columns-2">
                             <span class="subtitle subtitle--left">
-                                {{ $prismic.richTextAsPlain(section.subtitle) }}
+                                {{ section.subtitle }}
                             </span>
                             <h2 class="title title--section title--left">
-                                {{ $prismic.richTextAsPlain(section.title) }}
+                                {{ section.title }}
                             </h2>
-                            <prismic-rich-text :field="section.text" class="text text--mini"/>
+                            <div class="text text--mini"
+                                 v-html="section.text">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="container-fluid p-0">
                     <div class="icons icons--no-hover">
-                        <div v-for="(icon, index) in icons" :key="index" class="icons__item">
+                        <div v-for="(icon, index) in content.uslugi" :key="index" class="icons__item">
                             <svg>
                                 <use :href="'img/icons-team.svg#icon'+index"></use>
                             </svg>
                             <h4 class="icons__title">
-                                {{ $prismic.richTextAsPlain(icon.title) }}
+                                {{ icon.title }}
                             </h4>
                             <span class="icons__text">
-                                {{ $prismic.richTextAsPlain(icon.text) }}
+                                {{ icon.desc }}
                             </span>
                         </div>
                     </div>
                 </div>
             </section>
-            <section class="team__slider" v-if="slider.length > 0">
+            <section class="team__slider" v-if="content.slider.length > 0">
                 <div class="container-fluid">
                     <div class="row d-flex align-items-center flex-wrap-reverse">
                         <div class="col-lg-6 col-md-12">
                             <VueAgile ref="main" :as-nav-for="[$refs.thumbnails]" :options="sliderOpt" class="team__slider-one" @before-change="showCurrentSlide($event)">
-                                <div v-for="(slide, index) in slider" :key="index">
+                                <div v-for="(slide, index) in content.slider" :key="index">
                                     <span class="subtitle">
-                                        {{ $prismic.richTextAsPlain(slide.subtitle) }}
+                                        {{ slide.position }}
                                     </span>
                                     <h2 class="title">
-                                        {{ $prismic.richTextAsPlain(slide.title) }}
+                                        {{ slide.name }}
                                     </h2>
-                                    <prismic-rich-text :field="slide.text" class="text text--center"/>
+                                    <div class="text text--center"
+                                         v-html="slide.text">
+                                    </div>
                                 </div>
                             </VueAgile>
                             <div class="container">
                                 <div class="team__slider-dots">
-                                    <span class="team__slider-dot" v-for="(dot, index) in slider" :key="index" @click="slideGo(index)" :class="{'team__slider-dot--active' : index === activeSlide }">
-                                        {{ $prismic.richTextAsPlain(dot.nameSlide) }}
+                                    <span class="team__slider-dot" v-for="(dot, index) in content.slider" :key="index" @click="slideGo(index)" :class="{'team__slider-dot--active' : index === activeSlide }">
+                                        {{ dot.title }}
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12 p-0">
                             <VueAgile ref="thumbnails" :as-nav-for="[$refs.main]" :options="sliderOpt" class="team__slider-two">
-                                <div v-for="(slideThumb, index) in slider" :key="index">
-                                    <img :src="slideThumb.img.url">
+                                <div v-for="(slideThumb, index) in content.slider" :key="index">
+                                    <img :src="slideThumb.img">
                                 </div>
                             </VueAgile>
                         </div>
@@ -74,6 +81,8 @@
     import Banner from "../layouts/Banner";
     import { VueAgile } from 'vue-agile';
     import Preloader from "../layouts/Preloader";
+    import axios from "axios";
+
     export default {
         name: "Team",
         components: {
@@ -84,20 +93,9 @@
         data () {
             return {
                 isLoad: false,
-                banner: {
-                    title: '',
-                    subtitle: '',
-                    bgImg: '',
-                    bgVideo1: '',
-                    bgVideo2: '',
-                },
-                section: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                icons: {},
-                slider: {},
+                content: [],
+                meta: [],
+                metaTitle: '',
                 sliderOpt: {
                     slideToShow: 1,
                     SlideToScroll: 1,
@@ -115,32 +113,30 @@
                 activeSlide: 0,
             };
         },
-        metaInfo: {
-            title: 'Digital Elements - Команда',
-            meta: [
-                { name: 'description', content: 'Digital Elements' }
-            ],
+        metaInfo() {
+            return {
+                title: this.metaTitle,
+                meta: this.meta,
+            }
         },
         methods: {
             loading: function () {
                 let self = this;
                 self.isLoad = true
             },
-            getContent () {
-                let self = this;
-                self.$prismic.client.getSingle('team')
-                    .then((document) => {
-                        self.banner.title = document.data.title;
-                        self.banner.subtitle = document.data.subtitle;
-                        self.banner.bgImg = document.data.bgImg.url;
-                        self.section = {
-                            title: document.data.section[0].title,
-                            subtitle: document.data.section[0].subtitle,
-                            text: document.data.section[0].text
-                        };
-                        self.icons = document.data.icons;
-                        self.slider = document.data.slider;
+            getContent() {
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/23', {
+                    method: "GET"
+                })
+                    .then((response) => {
+                        this.content = response.data.acf;
+                        this.meta = response.data.yoast_meta;
+                        this.metaTitle = response.data.yoast_title;
                         setTimeout(this.loading, 1000);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        return error;
                     })
             },
             slideGo(index) {
