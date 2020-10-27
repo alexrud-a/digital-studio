@@ -20,9 +20,11 @@
             >
         </video>
         <div v-else class="banner__video">
-            <img
-                    :src="banner.background"
-            >
+            <picture>
+                <source media="(min-width: 768px)" :srcset="banner.background">
+                <img :src="banner.background_mobile"
+                >
+            </picture>
         </div>
         <div class="container">
             <div class="row">
