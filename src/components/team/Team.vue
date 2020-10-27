@@ -97,8 +97,8 @@
                 meta: [],
                 metaTitle: '',
                 sliderOpt: {
-                    slideToShow: 1,
-                    SlideToScroll: 1,
+                    slidesToShow: 1,
+                    SlidesToScroll: 1,
                     navButtons: true,
                     dots: false,
                     responsive: [
