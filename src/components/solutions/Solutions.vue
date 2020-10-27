@@ -1,54 +1,50 @@
 <template>
     <transition name="slide-fade">
         <div class="solutions">
-        <Banner :banner="banner"/>
-        <section class="section section--gray">
+        <Banner :banner="content.banner"/>
+        <section v-for="(section, i) in content.section"
+                 :key="i"
+                class="section"
+                 :class="{'section--gray' : i === 0, 'pb-0' : i === 1}"
+        >
             <div class="container">
-                <div class="row align-items-center">
+                <div class="row"
+                     :class="{'align-items-center' : i === 0}"
+                >
                     <div class="col-sm-12">
-                        <span class="subtitle subtitle--left">
-                            {{ $prismic.richTextAsPlain(section1.subtitle) }}
+                        <span class="subtitle"
+                              :class="{'subtitle--left' : i === 0}"
+                        >
+                            {{ section.subtitle }}
                         </span>
-                        <h2 class="title title--section title--left title--mini">
-                            {{ $prismic.richTextAsPlain(section1.title) }}
+                        <h2 class="title title--section"
+                            :class="{'title--left title--mini' : i === 0}"
+                        >
+                            {{ section.title }}
                         </h2>
-                        <p class="text text--mini columns-2">
-                            <prismic-rich-text :field="section1.text"/>
-                        </p>
+                        <div class="text text--mini"
+                             :class="{'columns-2' : i === 0, 'text--center' : i === 1}"
+                             v-html="section.text">
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="section pb-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="subtitle">
-                            {{ $prismic.richTextAsPlain(section2.subtitle) }}
-                        </span>
-                        <h2 class="title title--section">
-                            {{ $prismic.richTextAsPlain(section2.title) }}
-                        </h2>
-                        <prismic-rich-text :field="section2.text" class="text text--mini text--center"/>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid p-0">
+            <div class="container-fluid p-0" v-if="i === 1">
                 <div class="icons">
-                    <div v-for="(icon, index) in icons" :key="index" class="icons__item">
+                    <div v-for="(icon, index) in content.uslugi" :key="index" class="icons__item">
                         <router-link
-                                :to="{name: 'Solution', params: { name: icon.link.tags[0] }}"
+                                :to="{name: 'Solution', params: { name: icon.link.post_name }}"
                                 class="link"
                         >
                             <svg>
                                 <use :href="'img/icons.svg#icon'+index"></use>
                             </svg>
                             <h4 class="icons__title">
-                                {{ $prismic.richTextAsPlain(icon.title) }}
+                                {{ icon.title }}
                             </h4>
                             <span class="icons__text">
-                                {{ $prismic.richTextAsPlain(icon.text) }}
-                            </span>
+                                    {{ icon.desc }}
+                                </span>
                         </router-link>
                     </div>
                 </div>
@@ -65,6 +61,8 @@
     import FooterTop from "../layouts/FooterTop";
     import Preloader from "../layouts/Preloader";
 
+    import axios from 'axios'
+
     export default {
         name: "Solutions",
         components: {
@@ -75,37 +73,15 @@
         data () {
             return {
                 isLoad: false,
-                banner: {
-                    title: '',
-                    subtitle: '',
-                    bgImg: '',
-                },
-                section1: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                section2: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                icons: {},
-                metaDescription: '',
+                content: [],
+                meta: [],
+                metaTitle: ''
             };
         },
         metaInfo() {
             return {
-                title: 'Digital Elements - Услуги',
-                meta: [
-                    { name: 'description', content: this.metaDescription },
-                    {property: 'og:title', content: 'Digital Elements - Услуги'},
-                    {property: 'og:type', content: 'article'},
-                    {property: 'og:url', content: window.location.href },
-                    {property: 'og:description', content: this.metaDescription },
-                    {property: 'og:image', content: this.banner.bgImg },
-                    {property: 'og:site_name', content: 'Digital Elements'}
-                ],
+                title: this.metaTitle,
+                meta: this.meta,
             }
         },
         methods: {
@@ -113,37 +89,24 @@
                 let self = this;
                 self.isLoad = true
             },
-            getContent () {
-                let self = this;
-                self.$prismic.client.getSingle('solutions')
-                    .then((document) => {
-                        self.metaDescription = document.data.section[0].text[0].text;
-                        self.banner.title = document.data.title;
-                        self.banner.subtitle = document.data.subtitle;
-                        self.banner.bgImg = document.data.bgImg.url;
-                        self.section1 = {
-                            title: document.data.section[0].title,
-                            subtitle: document.data.section[0].subtitle,
-                            text: document.data.section[0].text
-                        };
-                        self.section2 = {
-                            title: document.data.section[1].title,
-                            subtitle: document.data.section[1].subtitle,
-                            text: document.data.section[1].text
-                        };
+            getContent() {
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/13', {
+                    method: "GET"
+                })
+                    .then((response) => {
+                        this.content = response.data.acf;
+                        this.meta = response.data.yoast_meta;
+                        this.metaTitle = response.data.yoast_title;
                         setTimeout(this.loading, 1000);
-                    });
-            },
-            getIcons () {
-                this.$prismic.client.getSingle('home')
-                    .then((document) => {
-                        this.icons = document.data.icons;
-                    });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        return error;
+                    })
             }
         },
         created() {
             this.getContent();
-            this.getIcons();
         }
     }
 </script>

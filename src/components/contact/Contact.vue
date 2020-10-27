@@ -1,17 +1,21 @@
 <template>
     <transition name="slide-fade">
         <div class="contact">
-        <section class="section">
+        <section v-for="(section, i) in content.section"
+                 :key="i"
+                class="section">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
                         <span class="subtitle">
-                            {{ $prismic.richTextAsPlain(info.subtitle) }}
+                            {{ section.subtitle }}
                         </span>
                         <h1 class="title title--section">
-                            {{ $prismic.richTextAsPlain(info.title) }}
+                            {{ section.title }}
                         </h1>
-                        <prismic-rich-text :field="info.text" class="text text--center text--mini"/>
+                        <div class="text text--center text--mini"
+                             v-html="section.text">
+                        </div>
                     </div>
                     <div class="col-sm-12">
                         <form class="contact__form" method="post" action="mail.php" @submit.prevent="submit">
@@ -53,7 +57,9 @@
                         </div>
                     </div>
                     <div class="col-sm-12">
-                        <prismic-rich-text :field="info.text_after_form" class="text text--mini"/>
+                        <div class="text text--mini"
+                             v-html="contentText">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,15 +74,21 @@
                         <div class="contact__info-wrap">
                             <div class="contact__info">
                                 <h2 class="contact__info-title">
-                                    Контакты
+                                    {{ content.contacts.title }}
                                 </h2>
                                 <p>
-                                    Вы можете связаться с нами любым удобным способом
+                                    {{ content.contacts.subtitle }}
                                 </p>
-                                <div class="contact__info-item" v-for="(link, index) in info.links" :key="index">
-                                    <span>{{link.type[0].text}}: </span>
-                                    <a :href="link.link[0].text+':'+link.text[0].text" class="link">
-                                        {{link.text[0].text}}
+                                <div class="contact__info-item">
+                                    <span>Телефон: </span>
+                                    <a :href="'tel:'+content.contacts.tel" class="link">
+                                        {{content.contacts.tel}}
+                                    </a>
+                                </div>
+                                <div class="contact__info-item">
+                                    <span>Email: </span>
+                                    <a :href="'mailto:'+content.contacts.email" class="link">
+                                        {{content.contacts.email}}
                                     </a>
                                 </div>
                             </div>
@@ -108,21 +120,17 @@
                 email: '',
                 text: '',
                 message: '',
-                info: {
-                    title: '',
-                    subtitle: '',
-                    text: '',
-                    text_after_form: '',
-                    coordinate_map: '',
-                    links: [],
-                },
+                content: [],
+                contentText: '',
+                meta: [],
+                metaTitle: '',
             }
         },
-        metaInfo: {
-            title: 'Digital Elements - Контакты',
-            meta: [
-                { name: 'description', content: 'Digital Elements' }
-            ],
+        metaInfo() {
+            return {
+                title: this.metaTitle,
+                meta: this.meta,
+            }
         },
         components: {
             Preloader
@@ -142,7 +150,7 @@
 
             function init() {
                 let myMap = new ymaps.Map("map", {
-                    center: [self.info.coordinate_map.latitude, self.info.coordinate_map.longitude],
+                    center: [self.content.contacts.coord.lat, self.content.contacts.coord.lng],
                     zoom: 15,
                     controls: []
                 });
@@ -208,19 +216,20 @@
                         }
                     });
             },
-            getContent () {
-                let self = this;
-                self.$prismic.client.getSingle('contacts')
-                    .then((document) => {
-                        self.info = {
-                            title: document.data.title,
-                            subtitle: document.data.subtitle,
-                            text: document.data.text,
-                            text_after_form: document.data.text_after_form,
-                            coordinate_map: document.data.coordinate_map,
-                            links: document.data.links
-                        },
+            getContent() {
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/11', {
+                    method: "GET"
+                })
+                    .then((response) => {
+                        this.content = response.data.acf;
+                        this.contentText = response.data.content.rendered;
+                        this.meta = response.data.yoast_meta;
+                        this.metaTitle = response.data.yoast_title;
                         setTimeout(this.loading, 1000);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        return error;
                     })
             },
         },

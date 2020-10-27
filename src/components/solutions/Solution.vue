@@ -1,33 +1,29 @@
 <template>
     <transition name="slide-fade">
         <div class="solution">
-        <Banner :banner="banner"/>
-        <section class="section section--gray">
+        <Banner :banner="content.banner"/>
+        <section class="section"
+                 :class="{'section--gray' : (i === 0)}"
+                 v-for="(section, i) in content.section"
+                 :key="i"
+        >
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-sm-12">
-                        <span class="subtitle subtitle--left">
-                            {{ $prismic.richTextAsPlain(section1.subtitle) }}
+                        <span class="subtitle"
+                              :class="{'subtitle--left' : (i === 0)}"
+                        >
+                            {{ section.subtitle }}
                         </span>
-                        <h2 class="title title--section title--left title--mini">
-                            {{ $prismic.richTextAsPlain(section1.title) }}
+                        <h2 class="title title--section"
+                            :class="{'title--left title--mini' : (i === 0)}"
+                        >
+                            {{ section.title }}
                         </h2>
-                        <prismic-rich-text :field="section1.text" class="text text--mini columns-2"/>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="subtitle">
-                            {{ $prismic.richTextAsPlain(section2.subtitle) }}
-                        </span>
-                        <h2 class="title title--section">
-                            {{ $prismic.richTextAsPlain(section2.title) }}
-                        </h2>
-                        <prismic-rich-text :field="section2.text" class="text text--center"/>
+                        <div class="text"
+                             :class="{'columns-2 text--mini' : i === 0, 'text--center' : i === 1}"
+                             v-html="section.text">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,6 +38,7 @@
     import Banner from "../layouts/Banner";
     import FooterTop from "../layouts/FooterTop";
     import Preloader from "../layouts/Preloader";
+    import axios from "axios";
 
     export default {
         name: "Solution",
@@ -53,37 +50,15 @@
         data () {
             return {
                 isLoad: false,
-                banner: {
-                    title: '',
-                    subtitle: '',
-                    bgImg: '',
-                },
-                section1: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                section2: {
-                    subtitle: '',
-                    title: '',
-                    text: ''
-                },
-                metaTitle: '',
-                metaDescription: '',
+                content: [],
+                meta: [],
+                metaTitle: ''
             };
         },
         metaInfo() {
             return {
-                title: 'Digital Elements - ' + this.metaTitle,
-                meta: [
-                    { name: 'description', content: this.metaDescription },
-                    {property: 'og:title', content: 'Digital Elements - ' + this.metaTitle},
-                    {property: 'og:type', content: 'article'},
-                    {property: 'og:url', content: window.location.href },
-                    {property: 'og:description', content: this.metaDescription },
-                    {property: 'og:image', content: this.banner.bgImg },
-                    {property: 'og:site_name', content: 'Digital Elements'}
-                ],
+                title: this.metaTitle,
+                meta: this.meta,
             }
         },
         methods: {
@@ -91,29 +66,24 @@
                 let self = this;
                 self.isLoad = true
             },
-            getContent () {
+            getContent() {
                 let self = this;
-                self.$prismic.client.query(
-                    self.$prismic.Predicates.at('document.tags', [self.$route.params.name])
-                )
+                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages', {
+                    method: "GET",
+                })
                     .then((response) => {
-                        self.metaTitle = response.results[0].data.title[0].text;
-                        self.metaDescription = response.results[0].data.section[0].text[0].text;
-                        self.banner.title = response.results[0].data.title;
-                        self.banner.subtitle = response.results[0].data.subtitle;
-                        self.banner.bgImg = response.results[0].data.bgImg.url;
-                        self.section1 = {
-                            title: response.results[0].data.section[0].title,
-                            subtitle: response.results[0].data.section[0].subtitle,
-                            text: response.results[0].data.section[0].text
-                        };
-                        self.section2 = {
-                            title: response.results[0].data.section[1].title,
-                            subtitle: response.results[0].data.section[1].subtitle,
-                            text: response.results[0].data.section[1].text
-                        };
+                        let page = response.data.filter(function (item) {
+                            return item.slug === self.$route.params.name
+                        });
+                        this.content = page[0].acf;
+                        this.meta = page[0].yoast_meta;
+                        this.metaTitle = page[0].yoast_title;
                         setTimeout(this.loading, 1000);
-                    });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        return error;
+                    })
             },
         },
         created() {

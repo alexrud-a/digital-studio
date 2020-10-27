@@ -28,13 +28,6 @@ import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 
 Vue.use(PerfectScrollbar)
 
-import PrismicVue from '@prismicio/vue'
-
-Vue.use(PrismicVue, {
-  endpoint: "https://digitaltudio.cdn.prismic.io/api/v2",
-});
-
-
 import VueMeta from 'vue-meta'
 Vue.use(VueMeta, {
   refreshOnceOnNavigation: true
