@@ -2,7 +2,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer__copyright">
-                Все права защищены © 2010 - {{getYear}} <router-link :to="{name: 'Home'}" class="link">Digital Elements</router-link>
+                Все права защищены © 2010 - {{getYear}} <router-link :to="{name: 'Home'}" class="link">Studio Elements</router-link>
             </div>
         </div>
     </footer>
