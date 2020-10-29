@@ -29,7 +29,7 @@
                                             </div>
                                         </div>
                                         <div class="contact__form-control">
-                                            <input class="inp-control" type="tel" placeholder="+7 (___) ___-__-__" v-mask="'+7 (###) ###-##-##'" v-model="phone" name="phone">
+                                            <input class="inp-control" type="tel" placeholder="+7 (___) ___-__-__" v-mask="'+# (###) ###-##-##'" v-model="phone" name="phone">
                                             <div v-if="!message.length" class="message">
                                                 {{ validation.firstError('phone') }}
                                             </div>
