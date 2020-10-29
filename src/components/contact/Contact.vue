@@ -29,7 +29,7 @@
                                             </div>
                                         </div>
                                         <div class="contact__form-control">
-                                            <input class="inp-control" type="tel" placeholder="Ваш Телефон" v-mask="'+7 (###) ###-##-##'" v-model="phone" name="phone">
+                                            <input class="inp-control" type="tel" placeholder="+7 (___) ___-__-__" v-mask="'+7 (###) ###-##-##'" v-model="phone" name="phone">
                                             <div v-if="!message.length" class="message">
                                                 {{ validation.firstError('phone') }}
                                             </div>
@@ -171,7 +171,7 @@
         },
         validators: {
             name: function (value) {
-                return Validator.value(value).minLength(5, 'Введите не менее 5 символов');
+                return Validator.value(value).minLength(3, 'Введите не менее 3 символов');
             },
             phone: function (value) {
                 return Validator.value(value).required('Поле обязательно для заполнения').length(18, 'Поле телефон должно содержать 10 цифр');
