@@ -5,7 +5,7 @@
             <section class="section"
                      v-for="(section, i) in content.section"
                      :key="i"
-                     :class="{'section--gray pb-0' : (i === 0)}"
+                     :class="{'section--gray pb-0' : (i === 0), 'section--gray pricelist' : (i === 2)}"
             >
                 <div class="container" v-if="i === 0">
                     <div class="row">
@@ -71,33 +71,72 @@
                         </div>
                     </div>
                 </div>
-                <div class="container" v-if="i === 2">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <span class="subtitle">
-                            {{ section.subtitle }}
-                            </span>
-                            <h2 class="title title--section">
-                                {{ section.title }}
-                            </h2>
-                            <div class="text text--center"
-                                 v-html="section.text">
-                            </div>
+              <div class="container" v-if="i === 2">
+                <div class="row">
+                  <div class="col-sm-12">
+                  <span class="subtitle">
+                    {{ section.subtitle }}
+                  </span>
+                    <h2 class="title title--section">
+                      {{ section.title }}
+                    </h2>
+                  </div>
+                </div>
+              </div>
+              <div class="container mt-5" v-if="i === 2">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-6 col-xs-12 d-flex"
+                       v-for="(card, ind) in content.priceItem"
+                       :key="ind"
+                  >
+                    <div class="card" itemscope="" itemtype="http://schema.org/Product">
+                      <div class="card-header">
+                        <span class="card__count">{{ind+1}}</span>
+                        <h3 class="card__title" itemprop="name">
+                          {{ card.title }}
+                        </h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="card__desc" itemprop="description">
+                          {{ card.text }}
+                        </div>
+                        <div class="card__price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                          <meta itemprop="price" :content="card.price">
+                          <meta itemprop="priceCurrency" content="RUB">
+                          от {{ card.price }} ₽
                         </div>
                     </div>
+                  </div>
                 </div>
-                <div class="container p-0" v-if="i === 2">
-                    <div class="clients">
-                        <div class="clients__item" v-for="(cat, index) in content.categories" :key="index">
-                            <svg>
-                                <use :href="'/img/clients.svg#'+cat.icon"></use>
-                            </svg>
-                            <span>
-                                {{ cat.title }}
-                            </span>
-                        </div>
+              </div>
+              </div>
+              <div class="container" v-if="i === 3">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <span class="subtitle">
+                      {{ section.subtitle }}
+                    </span>
+                    <h2 class="title title--section">
+                      {{ section.title }}
+                    </h2>
+                    <div class="text text--center"
+                         v-html="section.text">
                     </div>
+                  </div>
                 </div>
+              </div>
+              <div class="container p-0" v-if="i === 3">
+                <div class="clients">
+                  <div class="clients__item" v-for="(cat, index) in content.categories" :key="index">
+                    <svg>
+                      <use :href="'/img/clients.svg#'+cat.icon"></use>
+                    </svg>
+                    <span>
+                      {{ cat.title }}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </section>
         <FooterTop/>
         <Preloader :isLoad="isLoad"/>
@@ -399,6 +438,54 @@
                 }
             }
         }
+    }
+
+    .pricelist {
+      .container {
+        max-width: 1600px;
+      }
+
+      .card {
+        margin-bottom: 30px;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.05);
+        padding: 15px 15px 20px;
+        justify-content: space-between;
+
+        &-header {
+          display: flex;
+          align-items: center;
+          background-color: transparent;
+          border-bottom: none;
+        }
+
+        &-body {
+          justify-content: space-between;
+          display: flex;
+          flex-direction: column;
+        }
+
+        &__count {
+          font-weight: 900;
+          font-size: 40px;
+          margin-right: 15px;
+          color: $accent-color;
+        }
+
+        &__title {
+          margin-bottom: 0;
+          font-weight: 900;
+        }
+
+        &__desc {
+          margin-bottom: 15px;
+        }
+
+        &__price {
+          font-weight: 700;
+          font-size: 24px;
+          color: $accent-color;
+        }
+      }
     }
 
 </style>
