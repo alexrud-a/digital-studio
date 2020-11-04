@@ -205,6 +205,7 @@
                     self.phone = '';
                     self.email = '';
                     self.text = '';
+                    ym(69025372,'reachGoal','contact');
                 });
             },
             submit: function() {
