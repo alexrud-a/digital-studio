@@ -1,154 +1,160 @@
 <template>
-    <transition name="slide-fade">
-        <div class="home">
-        <Banner :banner="content.banner"/>
-            <section class="section"
-                     v-for="(section, i) in content.section"
-                     :key="i"
-                     :class="{'section--gray pb-0' : (i === 0), 'section--gray pricelist' : (i === 2)}"
+  <transition name="slide-fade">
+    <div class="home">
+      <Banner :banner="content.banner"/>
+      <section class="section"
+               v-for="(section, i) in content.section"
+               :key="i"
+               :class="{'section--gray pb-0' : (i === 0), 'section--gray pricelist' : (i === 2)}"
+      >
+        <div class="container" v-if="i === 0">
+          <div class="row">
+            <div class="col-sm-12">
+              <span class="subtitle">
+                {{ section.subtitle }}
+              </span>
+              <h2 class="title title--section">
+                {{ section.title }}
+              </h2>
+              <div class="text text--center"
+                   v-html="section.text">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid p-0" v-if="i === 0">
+          <div class="icons">
+            <div v-for="(icon, index) in content.uslugi" :key="index" class="icons__item">
+              <router-link
+                  :to="{name: 'Solution', params: { name: icon.link.post_name }}"
+                  class="link"
+              >
+                <svg>
+                  <use :href="'img/icons.svg#icon'+index"></use>
+                </svg>
+                <h4 class="icons__title">
+                  {{ icon.title }}
+                </h4>
+                <span class="icons__text">
+                  {{ icon.desc }}
+                </span>
+              </router-link>
+            </div>
+          </div>
+        </div>
+        <div class="container" v-if="i === 1">
+          <div class="row align-items-center">
+            <div class="col-md-4 col-sm-12">
+              <span class="subtitle subtitle--left">
+                {{ section.subtitle }}
+              </span>
+              <h2 class="title title--section title--left title--mini">
+                {{ section.title }}
+              </h2>
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <div class="text text--mini"
+                   v-html="section.text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="mini-banner">
+                <img src="/img/banner_bg.jpeg" class="mini-banner__img">
+                <router-link
+                    class="mini-banner__link"
+                    :to="{name: 'Solutions'}">
+                  Выбрать услугу
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container" v-if="i === 2">
+          <div class="row">
+            <div class="col-sm-12">
+              <span class="subtitle">
+                {{ section.subtitle }}
+              </span>
+              <h2 class="title title--section">
+                {{ section.title }}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="container mt-5" v-if="i === 2">
+          <div class="row">
+            <div class="col-xl-3 col-lg-6 col-xs-12 d-flex"
+                 v-for="(card, ind) in content.priceItem"
+                 :key="ind"
             >
-                <div class="container" v-if="i === 0">
-                    <div class="row">
-                        <div class="col-sm-12">
-                        <span class="subtitle">
-                            {{ section.subtitle }}
-                        </span>
-                            <h2 class="title title--section">
-                                {{ section.title }}
-                            </h2>
-                            <div class="text text--center"
-                                 v-html="section.text">
-                            </div>
-                        </div>
-                    </div>
+              <div class="card" itemscope="" itemtype="http://schema.org/Product">
+                <div class="card-header">
+                  <span class="card__count">{{ind+1}}</span>
+                  <h3 class="card__title" itemprop="name">
+                    {{ card.title }}
+                  </h3>
                 </div>
-                <div class="container-fluid p-0" v-if="i === 0">
-                    <div class="icons">
-                        <div v-for="(icon, index) in content.uslugi" :key="index" class="icons__item">
-                            <router-link
-                                    :to="{name: 'Solution', params: { name: icon.link.post_name }}"
-                                    class="link"
-                            >
-                                <svg>
-                                    <use :href="'img/icons.svg#icon'+index"></use>
-                                </svg>
-                                <h4 class="icons__title">
-                                    {{ icon.title }}
-                                </h4>
-                                <span class="icons__text">
-                                    {{ icon.desc }}
-                                </span>
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="container" v-if="i === 1">
-                    <div class="row align-items-center">
-                        <div class="col-md-4 col-sm-12">
-                        <span class="subtitle subtitle--left">
-                            {{ section.subtitle }}
-                        </span>
-                            <h2 class="title title--section title--left title--mini">
-                                {{ section.title }}
-                            </h2>
-                        </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="text text--mini"
-                                 v-html="section.text">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="mini-banner">
-                                <img src="/img/banner_bg.jpeg" class="mini-banner__img">
-                                <router-link
-                                        class="mini-banner__link"
-                                        :to="{name: 'Solutions'}">
-                                    Выбрать услугу
-                                </router-link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              <div class="container" v-if="i === 2">
-                <div class="row">
-                  <div class="col-sm-12">
-                  <span class="subtitle">
-                    {{ section.subtitle }}
-                  </span>
-                    <h2 class="title title--section">
-                      {{ section.title }}
-                    </h2>
+                <div class="card-body">
+                  <div class="card__desc" itemprop="description">
+                    {{ card.text }}
                   </div>
-                </div>
-              </div>
-              <div class="container mt-5" v-if="i === 2">
-                <div class="row">
-                  <div class="col-xl-3 col-lg-6 col-xs-12 d-flex"
-                       v-for="(card, ind) in content.priceItem"
-                       :key="ind"
-                  >
-                    <div class="card" itemscope="" itemtype="http://schema.org/Product">
-                      <div class="card-header">
-                        <span class="card__count">{{ind+1}}</span>
-                        <h3 class="card__title" itemprop="name">
-                          {{ card.title }}
-                        </h3>
-                      </div>
-                      <div class="card-body">
-                        <div class="card__desc" itemprop="description">
-                          {{ card.text }}
-                        </div>
-                        <div class="card__price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                          <meta itemprop="price" :content="card.price">
-                          <meta itemprop="priceCurrency" content="RUB">
-                          от {{ card.price }} ₽
-                        </div>
-                    </div>
+                  <div class="card__price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                    <meta itemprop="price" :content="card.price">
+                    <meta itemprop="priceCurrency" content="RUB">
+                    от {{ card.price }} ₽
                   </div>
+                  <button type="button" class="btn" v-b-modal="'modal-'+ind">
+                    Заказать
+                  </button>
+                  <b-modal :id="'modal-'+ind" centered hide-footer :title="card.title">
+                    <Order/>
+                  </b-modal>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="container" v-if="i === 3">
+          <div class="row">
+            <div class="col-sm-12">
+              <span class="subtitle">
+                {{ section.subtitle }}
+              </span>
+              <h2 class="title title--section">
+                {{ section.title }}
+              </h2>
+              <div class="text text--center"
+                   v-html="section.text">
               </div>
-              <div class="container" v-if="i === 3">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <span class="subtitle">
-                      {{ section.subtitle }}
-                    </span>
-                    <h2 class="title title--section">
-                      {{ section.title }}
-                    </h2>
-                    <div class="text text--center"
-                         v-html="section.text">
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="container p-0" v-if="i === 3">
-                <div class="clients">
-                  <div class="clients__item" v-for="(cat, index) in content.categories" :key="index">
-                    <svg>
-                      <use :href="'/img/clients.svg#'+cat.icon"></use>
-                    </svg>
-                    <span>
-                      {{ cat.title }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </section>
-        <FooterTop/>
-        <Preloader :isLoad="isLoad"/>
+            </div>
+          </div>
+        </div>
+        <div class="container p-0" v-if="i === 3">
+          <div class="clients">
+            <div class="clients__item" v-for="(cat, index) in content.categories" :key="index">
+              <svg>
+                <use :href="'/img/clients.svg#'+cat.icon"></use>
+              </svg>
+              <span>
+                {{ cat.title }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <FooterTop/>
+      <Preloader :isLoad="isLoad"/>
     </div>
-    </transition>
+  </transition>
 </template>
 
 <script>
-    import Banner from "../layouts/Banner"
+    import Banner from "../layouts/Banner";
     import FooterTop from "../layouts/FooterTop";
     import Preloader from "../layouts/Preloader";
-
+    import Order from "../layouts/Order";
     import axios from 'axios'
 
     export default {
@@ -168,33 +174,34 @@
             }
         },
         components: {
-            Preloader,
-            FooterTop,
-            Banner,
+          Order,
+          Preloader,
+          FooterTop,
+          Banner,
         },
         methods: {
-            loading: function () {
-                let self = this;
-                self.isLoad = true
-            },
-            getContent() {
-                return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/9', {
-                    method: "GET"
+          loading: function () {
+            let self = this;
+            self.isLoad = true
+          },
+          getContent() {
+            return axios('https://admin.studio-elements.ru/wp-json/wp/v2/pages/9', {
+              method: "GET"
+            })
+                .then((response) => {
+                  this.content = response.data.acf;
+                  this.meta = response.data.yoast_meta;
+                  this.metaTitle = response.data.yoast_title;
+                  setTimeout(this.loading, 1000);
                 })
-                    .then((response) => {
-                        this.content = response.data.acf;
-                        this.meta = response.data.yoast_meta;
-                        this.metaTitle = response.data.yoast_title;
-                        setTimeout(this.loading, 1000);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        return error;
-                    })
+                .catch((error) => {
+                  console.log(error);
+                  return error;
+                })
             },
         },
         created () {
-            this.getContent();
+          this.getContent();
         },
     }
 </script>
@@ -484,6 +491,7 @@
           font-weight: 700;
           font-size: 24px;
           color: $accent-color;
+          margin-bottom: 15px;
         }
       }
     }
