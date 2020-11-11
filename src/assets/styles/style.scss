@@ -123,6 +123,15 @@ body {
   overflow: hidden!important;
 }
 
+.modal-header {
+  padding: 20px 40px!important;
+}
+
+input {
+  outline: none!important;
+  border-radius: 0!important;
+}
+
 #app {
   font-family: $font;
   font-weight: 400;
