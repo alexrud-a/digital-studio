@@ -85,7 +85,7 @@
         </div>
         <div class="container mt-5" v-if="i === 2">
           <div class="row">
-            <div class="col-xl-3 col-lg-6 col-xs-12 d-flex"
+            <div class="col-xl-4 col-lg-6 col-xs-12 d-flex"
                  v-for="(card, ind) in content.priceItem"
                  :key="ind"
             >
@@ -103,7 +103,12 @@
                   <div class="card__price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                     <meta itemprop="price" :content="card.price">
                     <meta itemprop="priceCurrency" content="RUB">
-                    от {{ card.price }} ₽
+                    <template v-if="(ind === 4)">
+                      {{ card.price }}
+                    </template>
+                    <template v-else>
+                      от {{ card.price }} ₽
+                    </template>
                   </div>
                   <button type="button" class="btn" v-b-modal="'modal-'+ind">
                     Заказать
@@ -448,9 +453,6 @@
     }
 
     .pricelist {
-      .container {
-        max-width: 1600px;
-      }
 
       .card {
         margin-bottom: 30px;
